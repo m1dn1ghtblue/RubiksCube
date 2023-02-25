@@ -34,24 +34,30 @@ private:
     std::array<CornerCubie, 8> corners;
     std::array<EdgeCubie, 12> edges;
 
-    void turnClockWise(E_POS edge1, E_POS edge2, E_POS edge3, E_POS edge4,
-                 C_POS corner1, C_POS corner2, C_POS corner3, C_POS corner4);
+    void turnClockWise(E_POS edgeUp, E_POS edgeRight, E_POS edgeDown, E_POS edgeLeft,
+                 C_POS cornerUpLeft, C_POS cornerUpRight, C_POS cornerDownRight, C_POS cornerDownLeft);
 
-    void turnCounterClockWise(E_POS edge1, E_POS edge2, E_POS edge3, E_POS edge4,
-                 C_POS corner1, C_POS corner2, C_POS corner3, C_POS corner4);
+    void turnCounterClockWise(E_POS edgeUp, E_POS edgeRight, E_POS edgeDown, E_POS edgeLeft,
+                              C_POS cornerUpLeft, C_POS cornerUpRight, C_POS cornerDownRight, C_POS cornerDownLeft);
 
 public:
     Cube();
     void turn_U();
+    void turn_Uc();
     void turn_U2();
     void turn_D();
+    void turn_Dc();
     void turn_D2();
     void turn_L();
+    void turn_Lc();
     void turn_L2();
     void turn_R();
+    void turn_Rc();
     void turn_R2();
     void turn_F();
+    void turn_Fc();
     void turn_F2();
     void turn_B();
+    void turn_Bc();
     void turn_B2();
 };
