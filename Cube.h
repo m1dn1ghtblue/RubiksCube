@@ -54,4 +54,6 @@ public:
     void turn_F2();
     void turn_B(bool counterclockwise);
     void turn_B2();
+
+    bool is_solved();
 };

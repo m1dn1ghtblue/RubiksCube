@@ -167,3 +167,19 @@ void Cube::turn_R2() {
     std::swap(edges[UR], edges[DR]);
     std::swap(edges[RF], edges[RB]);
 }
+
+bool Cube::is_solved() {
+    for (int id = 0; id < 8; ++id) {
+        if (corners[id].get_original_id() != id || corners[id].get_twist_state() != 0) {
+            return false;
+        }
+    }
+
+    for (int id = 0; id < 12; ++id) {
+        if (edges[id].get_original_id() != id || edges[id].get_twist_state() != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
