@@ -21,7 +21,6 @@ public:
     explicit EdgeCubie(unsigned int id);
     EdgeCubie();
     EdgeCubie& operator=(const EdgeCubie& other);
-
 };
 
 class CornerCubie : public Cubie {
