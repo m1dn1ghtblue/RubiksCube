@@ -42,22 +42,16 @@ private:
 
 public:
     Cube();
-    void turn_U();
-    void turn_Uc();
+    void turn_U(bool counterclockwise);
     void turn_U2();
-    void turn_D();
-    void turn_Dc();
+    void turn_D(bool counterclockwise);
     void turn_D2();
-    void turn_L();
-    void turn_Lc();
+    void turn_L(bool counterclockwise);
     void turn_L2();
-    void turn_R();
-    void turn_Rc();
+    void turn_R(bool counterclockwise);
     void turn_R2();
-    void turn_F();
-    void turn_Fc();
+    void turn_F(bool counterclockwise);
     void turn_F2();
-    void turn_B();
-    void turn_Bc();
+    void turn_B(bool counterclockwise);
     void turn_B2();
 };
