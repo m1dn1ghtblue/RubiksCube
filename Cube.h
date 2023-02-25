@@ -42,6 +42,9 @@ private:
 
 public:
     Cube();
+    Cube(const Cube& other);
+    Cube& operator=(const Cube& other);
+
     void turn_U(bool counterclockwise = false);
     void turn_U2();
     void turn_D(bool counterclockwise = false);

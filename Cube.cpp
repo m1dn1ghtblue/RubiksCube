@@ -12,6 +12,19 @@ Cube::Cube() {
     }
 }
 
+Cube::Cube(const Cube& other) {
+    this->corners = other.corners;
+    this->edges = other.edges;
+}
+
+Cube &Cube::operator=(const Cube& other) {
+    if (this != &other) {
+        this->corners = other.corners;
+        this->edges = other.edges;
+    }
+    return *this;
+}
+
 void Cube::turnClockWise(E_POS edgeUp, E_POS edgeRight, E_POS edgeDown, E_POS edgeLeft,
                     C_POS cornerUpLeft, C_POS cornerUpRight, C_POS cornerDownRight, C_POS cornerDownLeft) {
     EdgeCubie tmpEdge = edges[edgeUp];
@@ -183,3 +196,4 @@ bool Cube::is_solved() const {
 
     return true;
 }
+
