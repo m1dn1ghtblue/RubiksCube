@@ -42,18 +42,18 @@ private:
 
 public:
     Cube();
-    void turn_U(bool counterclockwise);
+    void turn_U(bool counterclockwise = false);
     void turn_U2();
-    void turn_D(bool counterclockwise);
+    void turn_D(bool counterclockwise = false);
     void turn_D2();
-    void turn_L(bool counterclockwise);
+    void turn_L(bool counterclockwise = false);
     void turn_L2();
-    void turn_R(bool counterclockwise);
+    void turn_R(bool counterclockwise = false);
     void turn_R2();
-    void turn_F(bool counterclockwise);
+    void turn_F(bool counterclockwise = false);
     void turn_F2();
-    void turn_B(bool counterclockwise);
+    void turn_B(bool counterclockwise = false);
     void turn_B2();
 
-    bool is_solved();
+    bool is_solved() const;
 };

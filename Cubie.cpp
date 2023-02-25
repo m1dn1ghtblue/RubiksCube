@@ -14,7 +14,7 @@ unsigned int Cubie::get_twist_state() const {
 }
 
 EdgeCubie::EdgeCubie(unsigned int id) : Cubie(id) {
-    if (id > 7) {
+    if (id > 11) {
         throw std::invalid_argument("Invalid edge cubie id: " + std::to_string(id));
     }
 }
@@ -23,7 +23,6 @@ EdgeCubie::EdgeCubie() : Cubie() {}
 void EdgeCubie::twist() {
     _twist_state = (_twist_state + 1) % 2;
 }
-
 
 EdgeCubie& EdgeCubie::operator=(const EdgeCubie &other) {
     if (this != &other) {
@@ -34,7 +33,7 @@ EdgeCubie& EdgeCubie::operator=(const EdgeCubie &other) {
 }
 
 CornerCubie::CornerCubie(unsigned int id) : Cubie(id) {
-    if (id > 11) {
+    if (id > 8) {
         throw std::invalid_argument("Invalid corner cubie id: " + std::to_string(id));
     }
 }

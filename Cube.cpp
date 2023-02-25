@@ -42,7 +42,7 @@ void Cube::turnCounterClockWise(E_POS edgeUp, E_POS edgeRight, E_POS edgeDown, E
     corners[cornerDownLeft] = tmpCorner;
 }
 
-void Cube::turn_U(bool counterclockwise = false) {
+void Cube::turn_U(bool counterclockwise) {
     if (counterclockwise) {
         turnCounterClockWise(UF, UL, UB, UR, URF, ULF, ULB, URB);
     }
@@ -58,7 +58,7 @@ void Cube::turn_U2() {
     std::swap(edges[UL], edges[UR]);
 }
 
-void Cube::turn_D(bool counterclockwise = false) {
+void Cube::turn_D(bool counterclockwise) {
     if (counterclockwise) {
         turnCounterClockWise(DF, DR, DB, DL, DLF, DRF, DRB, DLB);
     }
@@ -74,7 +74,7 @@ void Cube::turn_D2() {
     std::swap(edges[DL], edges[DR]);
 }
 
-void Cube::turn_B(bool counterclockwise = false) {
+void Cube::turn_B(bool counterclockwise) {
     if (counterclockwise) {
         turnCounterClockWise(UB, LB, DB, RB, URB, ULB, DLB, DRB);
     }
@@ -100,7 +100,7 @@ void Cube::turn_B2() {
     std::swap(edges[RB], edges[LB]);
 }
 
-void Cube::turn_F(bool counterclockwise = false) {
+void Cube::turn_F(bool counterclockwise) {
     if (counterclockwise) {
         turnCounterClockWise(UF, RF, DF, LF, ULF, URF, DRF, DLF);
     }
@@ -126,7 +126,7 @@ void Cube::turn_F2() {
     std::swap(edges[LF], edges[RF]);
 }
 
-void Cube::turn_L(bool counterclockwise = false) {
+void Cube::turn_L(bool counterclockwise) {
     if (counterclockwise) {
         turnCounterClockWise(UL, LF, DL, LB, ULB, ULB, DLF, DLB);
     }
@@ -147,7 +147,7 @@ void Cube::turn_L2() {
     std::swap(edges[LF], edges[LB]);
 }
 
-void Cube::turn_R(bool counterclockwise = false) {
+void Cube::turn_R(bool counterclockwise) {
     if (counterclockwise) {
         turnCounterClockWise(UR, RB, DR, RF, URF, URB, DRB, DRF);
     }
@@ -168,7 +168,7 @@ void Cube::turn_R2() {
     std::swap(edges[RF], edges[RB]);
 }
 
-bool Cube::is_solved() {
+bool Cube::is_solved() const {
     for (int id = 0; id < 8; ++id) {
         if (corners[id].get_original_id() != id || corners[id].get_twist_state() != 0) {
             return false;
