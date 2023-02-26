@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Cube.h"
+#include "Cube/Cube.h"
 
 int main() {
     return 0;
