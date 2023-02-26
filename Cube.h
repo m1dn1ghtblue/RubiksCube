@@ -1,7 +1,6 @@
 #pragma once
-
-#include <array>
 #include "Cubie.h"
+#include <array>
 
 enum C_POS {
     ULB = 0,
@@ -58,5 +57,7 @@ public:
     void turn_B(bool counterclockwise = false);
     void turn_B2();
 
-    bool is_solved() const;
+    [[nodiscard]] bool is_solved() const;
+    [[nodiscard]] CornerCubie getCorner(C_POS position) const;
+    [[nodiscard]] EdgeCubie getEdge(E_POS position) const;
 };

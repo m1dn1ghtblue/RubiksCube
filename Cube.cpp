@@ -197,3 +197,11 @@ bool Cube::is_solved() const {
     return true;
 }
 
+CornerCubie Cube::getCorner(C_POS position) const {
+    return corners[position];
+}
+
+EdgeCubie Cube::getEdge(E_POS position) const {
+    return edges[position];
+}
+

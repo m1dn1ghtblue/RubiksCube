@@ -9,8 +9,8 @@ public:
     explicit Cubie(unsigned int id);
     Cubie();
 
-    unsigned int get_original_id() const;
-    unsigned int get_twist_state() const;
+    [[nodiscard]] unsigned int get_original_id() const;
+    [[nodiscard]] unsigned int get_twist_state() const;
 };
 
 class EdgeCubie : public Cubie {
