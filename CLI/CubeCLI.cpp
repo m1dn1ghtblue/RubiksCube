@@ -1,6 +1,7 @@
 #include "CubeCLI.h"
 #include <iostream>
 #include <sstream>
+#include <array>
 
 CubeCLI::CubeCLI() {
     cube = Cube();
@@ -9,13 +10,13 @@ CubeCLI::CubeCLI() {
 
     cornerColormap = {
             {ULB, {surfaceColormap[U], surfaceColormap[L], surfaceColormap[B]}},
-            {ULF, {surfaceColormap[U], surfaceColormap[L], surfaceColormap[F]}},
-            {URB, {surfaceColormap[U], surfaceColormap[R], surfaceColormap[B]}},
+            {UFL, {surfaceColormap[U], surfaceColormap[F], surfaceColormap[L]}},
+            {UBR, {surfaceColormap[U], surfaceColormap[B], surfaceColormap[R]}},
             {URF, {surfaceColormap[U], surfaceColormap[R], surfaceColormap[F]}},
-            {DLB, {surfaceColormap[D], surfaceColormap[L], surfaceColormap[B]}},
+            {DBL, {surfaceColormap[D], surfaceColormap[B], surfaceColormap[L]}},
             {DLF, {surfaceColormap[D], surfaceColormap[L], surfaceColormap[F]}},
             {DRB, {surfaceColormap[D], surfaceColormap[R], surfaceColormap[B]}},
-            {DRF, {surfaceColormap[D], surfaceColormap[R], surfaceColormap[F]}},
+            {DFR, {surfaceColormap[D], surfaceColormap[F], surfaceColormap[R]}},
     };
 
     edgeColormap = {
@@ -27,10 +28,10 @@ CubeCLI::CubeCLI() {
             {DR, {surfaceColormap[D], surfaceColormap[R]}},
             {DF, {surfaceColormap[D], surfaceColormap[F]}},
             {DB, {surfaceColormap[D], surfaceColormap[B]}},
-            {LF, {surfaceColormap[L], surfaceColormap[F]}},
-            {RF, {surfaceColormap[R], surfaceColormap[F]}},
-            {LB, {surfaceColormap[L], surfaceColormap[B]}},
-            {RB, {surfaceColormap[R], surfaceColormap[B]}},
+            {FL, {surfaceColormap[F], surfaceColormap[L]}},
+            {FR, {surfaceColormap[F], surfaceColormap[R]}},
+            {BL, {surfaceColormap[B], surfaceColormap[L]}},
+            {BR, {surfaceColormap[B], surfaceColormap[R]}},
     };
 
     commands = {
@@ -81,19 +82,19 @@ void CubeCLI::print_cube() {
     std::tie(down[1][0], left[2][1]) = get_edge_colors(DL);
     std::tie(down[1][2], right[2][1]) = get_edge_colors(DR);
     std::tie(down[2][1], back[2][1]) = get_edge_colors(DB);
-    std::tie(left[1][0], back[1][2]) = get_edge_colors(LB);
-    std::tie(left[1][2], front[1][0]) = get_edge_colors(LF);
-    std::tie(right[1][0], front[1][2]) = get_edge_colors(RF);
-    std::tie(right[1][2], back[1][0]) = get_edge_colors(RB);
+    std::tie(back[1][2], left[1][0]) = get_edge_colors(BL);
+    std::tie(front[1][0], left[1][2]) = get_edge_colors(FL);
+    std::tie(front[1][2], right[1][0]) = get_edge_colors(FR);
+    std::tie(back[1][0], right[1][2]) = get_edge_colors(BR);
 
     // paint corners
     std::tie(up[0][0], left[0][0], back[0][2]) = get_corner_colors(ULB);
-    std::tie(up[0][2], right[0][2], back[0][0]) = get_corner_colors(URB);
-    std::tie(up[2][0], left[0][2], front[0][0]) = get_corner_colors(ULF);
+    std::tie(up[0][2], back[0][0], right[0][2]) = get_corner_colors(UBR);
+    std::tie(up[2][0], front[0][0], left[0][2]) = get_corner_colors(UFL);
     std::tie(up[2][2], right[0][0], front[0][2]) = get_corner_colors(URF);
     std::tie(down[0][0], left[2][2], front[2][0]) = get_corner_colors(DLF);
-    std::tie(down[0][2], right[2][0], front[2][2]) = get_corner_colors(DRF);
-    std::tie(down[2][0], left[2][0], back[2][2]) = get_corner_colors(DLB);
+    std::tie(down[0][2], front[2][2], right[2][0]) = get_corner_colors(DFR);
+    std::tie(down[2][0], back[2][2], left[2][0]) = get_corner_colors(DBL);
     std::tie(down[2][2], right[2][2], back[2][0]) = get_corner_colors(DRB);
 
     printf("\n"
@@ -147,10 +148,16 @@ std::tuple<char, char, char> CubeCLI::get_corner_colors(C_POS position) {
     CornerCubie corner = cube.getCorner(position);
     std::array<char, 3> colors = cornerColormap[static_cast<C_POS>(corner.get_original_id())];
 
+    std::array<char, 3> placed_colors {};
+
+    placed_colors[corner.get_twist_state()] = colors[0];
+    placed_colors[(corner.get_twist_state() + 1) % 3] = colors[1];
+    placed_colors[(corner.get_twist_state() + 2) % 3] = colors[2];
+
     return std::make_tuple(
-        colors[corner.get_twist_state()],
-        colors[(corner.get_twist_state() + 1) % 3],
-        colors[(corner.get_twist_state() + 2) % 3]
+            colors[(3 - corner.get_twist_state()) % 3],
+            colors[(4 - corner.get_twist_state()) % 3],
+            colors[(5 - corner.get_twist_state()) % 3]
     );
 }
 
@@ -240,54 +247,54 @@ void CubeCLI::print_indexes() {
            "        %2d %2d %2d\n",
            cube.getCorner(ULB).get_original_id(),
            cube.getEdge(UB).get_original_id(),
-           cube.getCorner(URB).get_original_id(),
+           cube.getCorner(UBR).get_original_id(),
            cube.getEdge(UL).get_original_id(),
            cube.getEdge(UR).get_original_id(),
-           cube.getCorner(ULF).get_original_id(),
+           cube.getCorner(UFL).get_original_id(),
            cube.getEdge(UF).get_original_id(),
            cube.getCorner(URF).get_original_id(),
 
            cube.getCorner(ULB).get_original_id(),
            cube.getEdge(UL).get_original_id(),
-           cube.getCorner(ULF).get_original_id(),
-           cube.getCorner(ULF).get_original_id(),
+           cube.getCorner(UFL).get_original_id(),
+           cube.getCorner(UFL).get_original_id(),
            cube.getEdge(UF).get_original_id(),
            cube.getCorner(URF).get_original_id(),
            cube.getCorner(URF).get_original_id(),
            cube.getEdge(UR).get_original_id(),
-           cube.getCorner(URB).get_original_id(),
-           cube.getCorner(URB).get_original_id(),
+           cube.getCorner(UBR).get_original_id(),
+           cube.getCorner(UBR).get_original_id(),
            cube.getEdge(UB).get_original_id(),
            cube.getCorner(ULB).get_original_id(),
 
-           cube.getEdge(LB).get_original_id(),
-           cube.getEdge(LF).get_original_id(),
-           cube.getEdge(LF).get_original_id(),
-           cube.getEdge(RF).get_original_id(),
-           cube.getEdge(RF).get_original_id(),
-           cube.getEdge(RB).get_original_id(),
-           cube.getEdge(RB).get_original_id(),
-           cube.getEdge(LB).get_original_id(),
+           cube.getEdge(BL).get_original_id(),
+           cube.getEdge(FL).get_original_id(),
+           cube.getEdge(FL).get_original_id(),
+           cube.getEdge(FR).get_original_id(),
+           cube.getEdge(FR).get_original_id(),
+           cube.getEdge(BR).get_original_id(),
+           cube.getEdge(BR).get_original_id(),
+           cube.getEdge(BL).get_original_id(),
 
-           cube.getCorner(DLB).get_original_id(),
+           cube.getCorner(DBL).get_original_id(),
            cube.getEdge(DL).get_original_id(),
            cube.getCorner(DLF).get_original_id(),
            cube.getCorner(DLF).get_original_id(),
            cube.getEdge(DF).get_original_id(),
-           cube.getCorner(DRF).get_original_id(),
-           cube.getCorner(DRF).get_original_id(),
+           cube.getCorner(DFR).get_original_id(),
+           cube.getCorner(DFR).get_original_id(),
            cube.getEdge(DR).get_original_id(),
            cube.getCorner(DRB).get_original_id(),
            cube.getCorner(DRB).get_original_id(),
            cube.getEdge(DB).get_original_id(),
-           cube.getCorner(DLB).get_original_id(),
+           cube.getCorner(DBL).get_original_id(),
 
            cube.getCorner(DLF).get_original_id(),
            cube.getEdge(DF).get_original_id(),
-           cube.getCorner(DRF).get_original_id(),
+           cube.getCorner(DFR).get_original_id(),
            cube.getEdge(DL).get_original_id(),
            cube.getEdge(DR).get_original_id(),
-           cube.getCorner(DLB).get_original_id(),
+           cube.getCorner(DBL).get_original_id(),
            cube.getEdge(DB).get_original_id(),
            cube.getCorner(DRB).get_original_id()
     );
@@ -308,54 +315,54 @@ void CubeCLI::print_states() {
            "        %2d %2d %2d\n",
            cube.getCorner(ULB).get_twist_state(),
            cube.getEdge(UB).get_twist_state(),
-           cube.getCorner(URB).get_twist_state(),
+           cube.getCorner(UBR).get_twist_state(),
            cube.getEdge(UL).get_twist_state(),
            cube.getEdge(UR).get_twist_state(),
-           cube.getCorner(ULF).get_twist_state(),
+           cube.getCorner(UFL).get_twist_state(),
            cube.getEdge(UF).get_twist_state(),
            cube.getCorner(URF).get_twist_state(),
 
            cube.getCorner(ULB).get_twist_state(),
            cube.getEdge(UL).get_twist_state(),
-           cube.getCorner(ULF).get_twist_state(),
-           cube.getCorner(ULF).get_twist_state(),
+           cube.getCorner(UFL).get_twist_state(),
+           cube.getCorner(UFL).get_twist_state(),
            cube.getEdge(UF).get_twist_state(),
            cube.getCorner(URF).get_twist_state(),
            cube.getCorner(URF).get_twist_state(),
            cube.getEdge(UR).get_twist_state(),
-           cube.getCorner(URB).get_twist_state(),
-           cube.getCorner(URB).get_twist_state(),
+           cube.getCorner(UBR).get_twist_state(),
+           cube.getCorner(UBR).get_twist_state(),
            cube.getEdge(UB).get_twist_state(),
            cube.getCorner(ULB).get_twist_state(),
 
-           cube.getEdge(LB).get_twist_state(),
-           cube.getEdge(LF).get_twist_state(),
-           cube.getEdge(LF).get_twist_state(),
-           cube.getEdge(RF).get_twist_state(),
-           cube.getEdge(RF).get_twist_state(),
-           cube.getEdge(RB).get_twist_state(),
-           cube.getEdge(RB).get_twist_state(),
-           cube.getEdge(LB).get_twist_state(),
+           cube.getEdge(BL).get_twist_state(),
+           cube.getEdge(FL).get_twist_state(),
+           cube.getEdge(FL).get_twist_state(),
+           cube.getEdge(FR).get_twist_state(),
+           cube.getEdge(FR).get_twist_state(),
+           cube.getEdge(BR).get_twist_state(),
+           cube.getEdge(BR).get_twist_state(),
+           cube.getEdge(BL).get_twist_state(),
 
-           cube.getCorner(DLB).get_twist_state(),
+           cube.getCorner(DBL).get_twist_state(),
            cube.getEdge(DL).get_twist_state(),
            cube.getCorner(DLF).get_twist_state(),
            cube.getCorner(DLF).get_twist_state(),
            cube.getEdge(DF).get_twist_state(),
-           cube.getCorner(DRF).get_twist_state(),
-           cube.getCorner(DRF).get_twist_state(),
+           cube.getCorner(DFR).get_twist_state(),
+           cube.getCorner(DFR).get_twist_state(),
            cube.getEdge(DR).get_twist_state(),
            cube.getCorner(DRB).get_twist_state(),
            cube.getCorner(DRB).get_twist_state(),
            cube.getEdge(DB).get_twist_state(),
-           cube.getCorner(DLB).get_twist_state(),
+           cube.getCorner(DBL).get_twist_state(),
 
            cube.getCorner(DLF).get_twist_state(),
            cube.getEdge(DF).get_twist_state(),
-           cube.getCorner(DRF).get_twist_state(),
+           cube.getCorner(DFR).get_twist_state(),
            cube.getEdge(DL).get_twist_state(),
            cube.getEdge(DR).get_twist_state(),
-           cube.getCorner(DLB).get_twist_state(),
+           cube.getCorner(DBL).get_twist_state(),
            cube.getEdge(DB).get_twist_state(),
            cube.getCorner(DRB).get_twist_state()
     );

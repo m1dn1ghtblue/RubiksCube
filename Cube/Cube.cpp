@@ -57,15 +57,15 @@ void Cube::turnCounterClockWise(E_POS edgeUp, E_POS edgeRight, E_POS edgeDown, E
 
 void Cube::turn_U(bool counterclockwise) {
     if (counterclockwise) {
-        turnCounterClockWise(UF, UL, UB, UR, URF, ULF, ULB, URB);
+        turnCounterClockWise(UF, UL, UB, UR, URF, UFL, ULB, UBR);
     }
     else {
-        turnClockWise(UF, UL, UB, UR, URF, ULF, ULB, URB);
+        turnClockWise(UF, UL, UB, UR, URF, UFL, ULB, UBR);
     }
 }
 
 void Cube::turn_U2() {
-    std::swap(corners[ULF], corners[URB]);
+    std::swap(corners[UFL], corners[UBR]);
     std::swap(corners[URF], corners[ULB]);
     std::swap(edges[UF], edges[UB]);
     std::swap(edges[UL], edges[UR]);
@@ -73,112 +73,112 @@ void Cube::turn_U2() {
 
 void Cube::turn_D(bool counterclockwise) {
     if (counterclockwise) {
-        turnCounterClockWise(DF, DR, DB, DL, DLF, DRF, DRB, DLB);
+        turnCounterClockWise(DF, DR, DB, DL, DLF, DFR, DRB, DBL);
     }
     else {
-        turnClockWise(DF, DR, DB, DL, DLF, DRF, DRB, DLB);
+        turnClockWise(DF, DR, DB, DL, DLF, DFR, DRB, DBL);
     }
 }
 
 void Cube::turn_D2() {
     std::swap(corners[DLF], corners[DRB]);
-    std::swap(corners[DRF], corners[DLB]);
+    std::swap(corners[DFR], corners[DBL]);
     std::swap(edges[DF], edges[DB]);
     std::swap(edges[DL], edges[DR]);
 }
 
 void Cube::turn_B(bool counterclockwise) {
     if (counterclockwise) {
-        turnCounterClockWise(UB, LB, DB, RB, URB, ULB, DLB, DRB);
+        turnCounterClockWise(UB, BL, DB, BR, UBR, ULB, DBL, DRB);
     }
     else{
-        turnClockWise(UB, LB, DB, RB, URB, ULB, DLB, DRB);
+        turnClockWise(UB, BL, DB, BR, UBR, ULB, DBL, DRB);
     }
 
     corners[ULB].twist(1);
     corners[DRB].twist(1);
-    corners[URB].twist(2);
-    corners[DLB].twist(2);
+    corners[UBR].twist(2);
+    corners[DBL].twist(2);
 
     edges[UB].twist();
-    edges[RB].twist();
+    edges[BR].twist();
     edges[DB].twist();
-    edges[LB].twist();
+    edges[BL].twist();
 }
 
 void Cube::turn_B2() {
-    std::swap(corners[URB], corners[DLB]);
+    std::swap(corners[UBR], corners[DBL]);
     std::swap(corners[ULB], corners[DRB]);
     std::swap(edges[UB], edges[DB]);
-    std::swap(edges[RB], edges[LB]);
+    std::swap(edges[BR], edges[BL]);
 }
 
 void Cube::turn_F(bool counterclockwise) {
     if (counterclockwise) {
-        turnCounterClockWise(UF, RF, DF, LF, ULF, URF, DRF, DLF);
+        turnCounterClockWise(UF, FR, DF, FL, UFL, URF, DFR, DLF);
     }
     else {
-        turnClockWise(UF, RF, DF, LF, ULF, URF, DRF, DLF);
+        turnClockWise(UF, FR, DF, FL, UFL, URF, DFR, DLF);
     }
 
     corners[URF].twist(1);
     corners[DLF].twist(1);
-    corners[DRF].twist(2);
-    corners[ULF].twist(2);
+    corners[DFR].twist(2);
+    corners[UFL].twist(2);
 
     edges[UF].twist();
-    edges[RF].twist();
+    edges[FR].twist();
     edges[DF].twist();
-    edges[LF].twist();
+    edges[FL].twist();
 }
 
 void Cube::turn_F2() {
-    std::swap(corners[ULF], corners[DRF]);
+    std::swap(corners[UFL], corners[DFR]);
     std::swap(corners[URF], corners[DLF]);
     std::swap(edges[UF], edges[DF]);
-    std::swap(edges[LF], edges[RF]);
+    std::swap(edges[FL], edges[FR]);
 }
 
 void Cube::turn_L(bool counterclockwise) {
     if (counterclockwise) {
-        turnCounterClockWise(UL, LF, DL, LB, ULB, ULB, DLF, DLB);
+        turnCounterClockWise(UL, FL, DL, BL, ULB, UFL, DLF, DBL);
     }
     else{
-        turnClockWise(UL, LF, DL, LB, ULB, ULB, DLF, DLB);
+        turnClockWise(UL, FL, DL, BL, ULB, UFL, DLF, DBL);
     }
 
-    corners[ULF].twist(1);
-    corners[DLB].twist(1);
+    corners[UFL].twist(1);
+    corners[DBL].twist(1);
     corners[DLF].twist(2);
     corners[ULB].twist(2);
 }
 
 void Cube::turn_L2() {
-    std::swap(corners[ULF], corners[DLB]);
+    std::swap(corners[UFL], corners[DBL]);
     std::swap(corners[ULB], corners[DLF]);
     std::swap(edges[UL], edges[DL]);
-    std::swap(edges[LF], edges[LB]);
+    std::swap(edges[FL], edges[BL]);
 }
 
 void Cube::turn_R(bool counterclockwise) {
     if (counterclockwise) {
-        turnCounterClockWise(UR, RB, DR, RF, URF, URB, DRB, DRF);
+        turnCounterClockWise(UR, BR, DR, FR, URF, UBR, DRB, DFR);
     }
     else {
-        turnClockWise(UR, RB, DR, RF, URF, URB, DRB, DRF);
+        turnClockWise(UR, BR, DR, FR, URF, UBR, DRB, DFR);
     }
 
-    corners[URB].twist(1);
-    corners[DRF].twist(1);
+    corners[UBR].twist(1);
+    corners[DFR].twist(1);
     corners[URF].twist(2);
     corners[DRB].twist(2);
 }
 
 void Cube::turn_R2() {
     std::swap(corners[URF], corners[DRB]);
-    std::swap(corners[URB], corners[DRF]);
+    std::swap(corners[UBR], corners[DFR]);
     std::swap(edges[UR], edges[DR]);
-    std::swap(edges[RF], edges[RB]);
+    std::swap(edges[FR], edges[BR]);
 }
 
 bool Cube::is_solved() const {

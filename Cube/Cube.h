@@ -4,12 +4,12 @@
 
 enum C_POS {
     ULB = 0,
-    ULF = 1,
+    UFL = 1,
     URF = 2,
-    URB = 3,
-    DLB = 4,
+    UBR = 3,
+    DBL = 4,
     DLF = 5,
-    DRF = 6,
+    DFR = 6,
     DRB = 7
 };
 
@@ -18,10 +18,10 @@ enum E_POS {
     UF = 1,
     UR = 2,
     UB = 3,
-    LB = 4,
-    LF = 5,
-    RF = 6,
-    RB = 7,
+    BL = 4,
+    FL = 5,
+    FR = 6,
+    BR = 7,
     DL = 8,
     DF = 9,
     DR = 10,
