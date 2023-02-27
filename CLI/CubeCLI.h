@@ -39,7 +39,4 @@ public:
     void print_cube();
     void perform_sequence(const std::string& sequence);
     void perform_command(const std::string& command);
-
-    void print_indexes();
-    void print_states();
 };
