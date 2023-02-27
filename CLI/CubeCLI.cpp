@@ -6,7 +6,7 @@
 CubeCLI::CubeCLI() {
     cube = Cube();
 
-    surfaceColormap = {'U', 'L', 'F', 'R', 'B', 'D'};
+    surfaceColormap = {'W', 'O', 'G', 'R', 'B', 'Y'};
 
     cornerColormap = {
             {ULB, {surfaceColormap[U], surfaceColormap[L], surfaceColormap[B]}},
@@ -97,7 +97,7 @@ void CubeCLI::print_cube() {
     std::tie(down[2][0], back[2][2], left[2][0]) = get_corner_colors(DBL);
     std::tie(down[2][2], right[2][2], back[2][0]) = get_corner_colors(DRB);
 
-    printf("\n"
+    printf("\n-------------------------------------------------------\n"
            "        %c %c %c\n"
            "        %c %c %c\n"
            "        %c %c %c\n"
@@ -108,7 +108,8 @@ void CubeCLI::print_cube() {
            "\n"
            "        %c %c %c\n"
            "        %c %c %c\n"
-           "        %c %c %c\n",
+           "        %c %c %c\n"
+           "-------------------------------------------------------\n",
            up[0][0], up[0][1], up[0][2],
            up[1][0], up[1][1], up[1][2],
            up[2][0], up[2][1], up[2][2],
