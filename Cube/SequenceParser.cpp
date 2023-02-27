@@ -113,14 +113,47 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
 
         case X:
             orient_x();
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    orient_x();
+                    orient_x();
+                    break;
+                }
+                else if (command[1] == '2') {
+                    orient_x();
+                    break;
+                }
+            }
             break;
 
         case Y:
             orient_y();
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    orient_y();
+                    orient_y();
+                    break;
+                }
+                else if (command[1] == '2') {
+                    orient_y();
+                    break;
+                }
+            }
             break;
 
         case Z:
             orient_z();
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    orient_z();
+                    orient_z();
+                    break;
+                }
+                else if (command[1] == '2') {
+                    orient_z();
+                    break;
+                }
+            }
             break;
 
         default:
