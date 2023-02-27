@@ -6,12 +6,12 @@
 #include "../Cube/SequenceParser.h"
 
 enum SURFACE {
-    U = 0,
-    L = 1,
-    F = 2,
-    R = 3,
-    B = 4,
-    D = 5
+    U_SURFACE = 0,
+    L_SURFACE = 1,
+    F_SURFACE = 2,
+    R_SURFACE = 3,
+    B_SURFACE = 4,
+    D_SURFACE = 5
 };
 
 class CubeCLI {

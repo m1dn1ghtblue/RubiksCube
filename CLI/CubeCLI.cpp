@@ -10,29 +10,29 @@ CubeCLI::CubeCLI() {
     surfaceColormap = {'W', 'O', 'G', 'R', 'B', 'Y'};
 
     cornerColormap = {
-            {ULB, {surfaceColormap[U], surfaceColormap[L], surfaceColormap[B]}},
-            {UFL, {surfaceColormap[U], surfaceColormap[F], surfaceColormap[L]}},
-            {UBR, {surfaceColormap[U], surfaceColormap[B], surfaceColormap[R]}},
-            {URF, {surfaceColormap[U], surfaceColormap[R], surfaceColormap[F]}},
-            {DBL, {surfaceColormap[D], surfaceColormap[B], surfaceColormap[L]}},
-            {DLF, {surfaceColormap[D], surfaceColormap[L], surfaceColormap[F]}},
-            {DRB, {surfaceColormap[D], surfaceColormap[R], surfaceColormap[B]}},
-            {DFR, {surfaceColormap[D], surfaceColormap[F], surfaceColormap[R]}},
+            {ULB, {surfaceColormap[U_SURFACE], surfaceColormap[L_SURFACE], surfaceColormap[B_SURFACE]}},
+            {UFL, {surfaceColormap[U_SURFACE], surfaceColormap[F_SURFACE], surfaceColormap[L_SURFACE]}},
+            {UBR, {surfaceColormap[U_SURFACE], surfaceColormap[B_SURFACE], surfaceColormap[R_SURFACE]}},
+            {URF, {surfaceColormap[U_SURFACE], surfaceColormap[R_SURFACE], surfaceColormap[F_SURFACE]}},
+            {DBL, {surfaceColormap[D_SURFACE], surfaceColormap[B_SURFACE], surfaceColormap[L_SURFACE]}},
+            {DLF, {surfaceColormap[D_SURFACE], surfaceColormap[L_SURFACE], surfaceColormap[F_SURFACE]}},
+            {DRB, {surfaceColormap[D_SURFACE], surfaceColormap[R_SURFACE], surfaceColormap[B_SURFACE]}},
+            {DFR, {surfaceColormap[D_SURFACE], surfaceColormap[F_SURFACE], surfaceColormap[R_SURFACE]}},
     };
 
     edgeColormap = {
-            {UL, {surfaceColormap[U], surfaceColormap[L]}},
-            {UR, {surfaceColormap[U], surfaceColormap[R]}},
-            {UF, {surfaceColormap[U], surfaceColormap[F]}},
-            {UB, {surfaceColormap[U], surfaceColormap[B]}},
-            {DL, {surfaceColormap[D], surfaceColormap[L]}},
-            {DR, {surfaceColormap[D], surfaceColormap[R]}},
-            {DF, {surfaceColormap[D], surfaceColormap[F]}},
-            {DB, {surfaceColormap[D], surfaceColormap[B]}},
-            {FL, {surfaceColormap[F], surfaceColormap[L]}},
-            {FR, {surfaceColormap[F], surfaceColormap[R]}},
-            {BL, {surfaceColormap[B], surfaceColormap[L]}},
-            {BR, {surfaceColormap[B], surfaceColormap[R]}},
+            {UL, {surfaceColormap[U_SURFACE], surfaceColormap[L_SURFACE]}},
+            {UR, {surfaceColormap[U_SURFACE], surfaceColormap[R_SURFACE]}},
+            {UF, {surfaceColormap[U_SURFACE], surfaceColormap[F_SURFACE]}},
+            {UB, {surfaceColormap[U_SURFACE], surfaceColormap[B_SURFACE]}},
+            {DL, {surfaceColormap[D_SURFACE], surfaceColormap[L_SURFACE]}},
+            {DR, {surfaceColormap[D_SURFACE], surfaceColormap[R_SURFACE]}},
+            {DF, {surfaceColormap[D_SURFACE], surfaceColormap[F_SURFACE]}},
+            {DB, {surfaceColormap[D_SURFACE], surfaceColormap[B_SURFACE]}},
+            {FL, {surfaceColormap[F_SURFACE], surfaceColormap[L_SURFACE]}},
+            {FR, {surfaceColormap[F_SURFACE], surfaceColormap[R_SURFACE]}},
+            {BL, {surfaceColormap[B_SURFACE], surfaceColormap[L_SURFACE]}},
+            {BR, {surfaceColormap[B_SURFACE], surfaceColormap[R_SURFACE]}},
     };
 }
 
@@ -46,12 +46,12 @@ void CubeCLI::print_cube() {
     surface_matrix back;
 
     // paint centers
-    up[1][1] = surfaceColormap[U];
-    down[1][1] = surfaceColormap[D];
-    left[1][1] = surfaceColormap[L];
-    right[1][1] = surfaceColormap[R];
-    front[1][1] = surfaceColormap[F];
-    back[1][1] = surfaceColormap[B];
+    up[1][1] = surfaceColormap[U_SURFACE];
+    down[1][1] = surfaceColormap[D_SURFACE];
+    left[1][1] = surfaceColormap[L_SURFACE];
+    right[1][1] = surfaceColormap[R_SURFACE];
+    front[1][1] = surfaceColormap[F_SURFACE];
+    back[1][1] = surfaceColormap[B_SURFACE];
 
     // paint edges
     std::tie(up[0][1], back[0][1]) = get_edge_colors(UB);

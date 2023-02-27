@@ -5,24 +5,15 @@
 
 SequenceParser::SequenceParser() {
     commands = {
-            {"U", U_CW},
-            {"U'", U_CCW},
-            {"U2", U_2},
-            {"D", D_CW},
-            {"D'", D_CCW},
-            {"D2", D_2},
-            {"L", L_CW},
-            {"L'", L_CCW},
-            {"L2", L_2},
-            {"R", R_CW},
-            {"R'", R_CCW},
-            {"R2", R_2},
-            {"B", B_CW},
-            {"B'", B_CCW},
-            {"B2", B_2},
-            {"F", F_CW},
-            {"F'", F_CCW},
-            {"F2", F_2},
+            {'U', U},
+            {'D', D},
+            {'L', L},
+            {'R', R},
+            {'B', B},
+            {'F', F},
+            {'z', Z},
+            {'y', Y},
+            {'x', X}
     };
 }
 
@@ -35,63 +26,128 @@ void SequenceParser::perform_sequence(Cube& cube, const std::string& sequence) {
 }
 
 void SequenceParser::perform_command(Cube& cube, const std::string& command) {
-    switch (commands[command]) {
-        case U_CW:
+    switch (commands[command[0]]) {
+        case U:
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    cube.turn_U(true);
+                    break;
+                }
+                else if (command[1] == '2') {
+                    cube.turn_U2();
+                    break;
+                }
+            }
             cube.turn_U();
             break;
-        case U_CCW:
-            cube.turn_U(true);
-            break;
-        case U_2:
-            cube.turn_U2();
-            break;
-        case D_CW:
+
+        case D:
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    cube.turn_D(true);
+                    break;
+                }
+                else if (command[1] == '2') {
+                    cube.turn_D2();
+                    break;
+                }
+            }
             cube.turn_D();
             break;
-        case D_CCW:
-            cube.turn_D(true);
-            break;
-        case D_2:
-            cube.turn_D2();
-            break;
-        case L_CW:
+
+        case L:
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    cube.turn_L(true);
+                    break;
+                }
+                else if (command[1] == '2') {
+                    cube.turn_L2();
+                    break;
+                }
+            }
             cube.turn_L();
             break;
-        case L_CCW:
-            cube.turn_L(true);
-            break;
-        case L_2:
-            cube.turn_L2();
-            break;
-        case R_CW:
+
+        case R:
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    cube.turn_R(true);
+                    break;
+                }
+                else if (command[1] == '2') {
+                    cube.turn_R2();
+                    break;
+                }
+            }
             cube.turn_R();
             break;
-        case R_CCW:
-            cube.turn_R(true);
-            break;
-        case R_2:
-            cube.turn_R2();
-            break;
-        case F_CW:
+
+        case F:
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    cube.turn_F(true);
+                    break;
+                }
+                else if (command[1] == '2') {
+                    cube.turn_F2();
+                    break;
+                }
+            }
             cube.turn_F();
             break;
-        case F_CCW:
-            cube.turn_F(true);
-            break;
-        case F_2:
-            cube.turn_F2();
-            break;
-        case B_CW:
+
+        case B:
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    cube.turn_B(true);
+                    break;
+                }
+                else if (command[1] == '2') {
+                    cube.turn_B2();
+                    break;
+                }
+            }
             cube.turn_B();
             break;
-        case B_CCW:
-            cube.turn_B(true);
+
+        case X:
+            orient_x();
             break;
-        case B_2:
-            cube.turn_B2();
+
+        case Y:
+            orient_y();
             break;
+
+        case Z:
+            orient_z();
+            break;
+
         default:
             break;
     }
 }
 
+void SequenceParser::orient_x() {
+    COMMAND tmp = commands['B'];
+    commands['B'] = commands['U'];
+    commands['U'] = commands['F'];
+    commands['F'] = commands['D'];
+    commands['D'] = tmp;
+}
+
+void SequenceParser::orient_y() {
+    COMMAND tmp = commands['B'];
+    commands['B'] = commands['L'];
+    commands['L'] = commands['F'];
+    commands['F'] = commands['R'];
+    commands['R'] = tmp;
+}
+
+void SequenceParser::orient_z() {
+    COMMAND tmp = commands['L'];
+    commands['L'] = commands['D'];
+    commands['D'] = commands['R'];
+    commands['R'] = commands['U'];
+    commands['U'] = tmp;
+}
