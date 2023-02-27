@@ -13,11 +13,14 @@ SequenceParser::SequenceParser() {
             {'F', F},
             {'z', Z},
             {'y', Y},
-            {'x', X}
+            {'x', X},
+            {'M', M},
+            {'E', E},
+            {'S', S}
     };
 }
 
-void SequenceParser::perform_sequence(Cube& cube, const std::string& sequence) {
+void SequenceParser::perform_sequence(Cube &cube, const std::string &sequence) {
     std::istringstream sequenceStream(sequence);
     std::string command;
     while (std::getline(sequenceStream, command, ' ')) {
@@ -25,15 +28,14 @@ void SequenceParser::perform_sequence(Cube& cube, const std::string& sequence) {
     }
 }
 
-void SequenceParser::perform_command(Cube& cube, const std::string& command) {
+void SequenceParser::perform_command(Cube &cube, const std::string &command) {
     switch (commands[command[0]]) {
         case U:
             if (command.size() > 1) {
                 if (command[1] == '\'') {
                     cube.turn_U(true);
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     cube.turn_U2();
                     break;
                 }
@@ -46,8 +48,7 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                 if (command[1] == '\'') {
                     cube.turn_D(true);
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     cube.turn_D2();
                     break;
                 }
@@ -60,8 +61,7 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                 if (command[1] == '\'') {
                     cube.turn_L(true);
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     cube.turn_L2();
                     break;
                 }
@@ -74,8 +74,7 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                 if (command[1] == '\'') {
                     cube.turn_R(true);
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     cube.turn_R2();
                     break;
                 }
@@ -88,8 +87,7 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                 if (command[1] == '\'') {
                     cube.turn_F(true);
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     cube.turn_F2();
                     break;
                 }
@@ -102,8 +100,7 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                 if (command[1] == '\'') {
                     cube.turn_B(true);
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     cube.turn_B2();
                     break;
                 }
@@ -118,8 +115,7 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                     orient_x();
                     orient_x();
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     orient_x();
                     break;
                 }
@@ -133,8 +129,7 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                     orient_y();
                     orient_y();
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     orient_y();
                     break;
                 }
@@ -148,16 +143,57 @@ void SequenceParser::perform_command(Cube& cube, const std::string& command) {
                     orient_z();
                     orient_z();
                     break;
-                }
-                else if (command[1] == '2') {
+                } else if (command[1] == '2') {
                     orient_z();
                     break;
                 }
             }
             break;
 
-        default:
-            break;
+        case M: {
+            slice_m(cube);
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    slice_m(cube);
+                    slice_m(cube);
+                    break;
+                } else if (command[1] == '2') {
+                    slice_m(cube);
+                    break;
+                }
+                break;
+            }
+
+            case E:
+                slice_e(cube);
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    slice_e(cube);
+                    slice_e(cube);
+                    break;
+                } else if (command[1] == '2') {
+                    slice_e(cube);
+                    break;
+                }
+                break;
+            }
+
+            case S:
+                slice_s(cube);
+            if (command.size() > 1) {
+                if (command[1] == '\'') {
+                    slice_s(cube);
+                    slice_s(cube);
+                    break;
+                } else if (command[1] == '2') {
+                    slice_s(cube);
+                    break;
+                }
+                break;
+            }
+            default:
+                break;
+        }
     }
 }
 
@@ -183,4 +219,22 @@ void SequenceParser::orient_z() {
     commands['D'] = commands['R'];
     commands['R'] = commands['U'];
     commands['U'] = tmp;
+}
+
+void SequenceParser::slice_m(Cube& cube) {
+    orient_x();
+    cube.turn_L(true);
+    cube.turn_R();
+}
+
+void SequenceParser::slice_e(Cube& cube) {
+    orient_y();
+    cube.turn_U();
+    cube.turn_D(true);
+}
+
+void SequenceParser::slice_s(Cube& cube) {
+    orient_z();
+    cube.turn_B();
+    cube.turn_F(true);
 }

@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include "Cube.h"
 
-enum COMMAND { U, B, L, R, D, F, X, Y, Z };
+enum COMMAND { U, B, L, R, D, F, X, Y, Z, M, E, S };
 
 class SequenceParser {
 private:
@@ -13,6 +13,9 @@ private:
     void orient_y();
     void orient_z();
 
+    void slice_m(Cube& cube);
+    void slice_e(Cube& cube);
+    void slice_s(Cube& cube);
 public:
     SequenceParser();
 
