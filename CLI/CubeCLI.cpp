@@ -230,3 +230,12 @@ void CubeCLI::perform_command(const std::string& command) {
             break;
     }
 }
+
+void CubeCLI::loop() {
+    std::string input;
+    print_cube();
+    while (std::cin >> input) {
+        perform_sequence(input);
+        print_cube();
+    }
+}

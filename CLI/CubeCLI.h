@@ -39,4 +39,5 @@ public:
     void print_cube();
     void perform_sequence(const std::string& sequence);
     void perform_command(const std::string& command);
+    void loop();
 };

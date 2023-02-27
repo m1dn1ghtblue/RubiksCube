@@ -3,5 +3,7 @@
 #include "CLI/CubeCLI.h"
 
 int main() {
+    CubeCLI cli;
+    cli.loop();
     return 0;
 }
