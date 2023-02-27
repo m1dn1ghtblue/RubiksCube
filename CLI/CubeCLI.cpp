@@ -224,3 +224,139 @@ void CubeCLI::perform_command(const std::string& command) {
     }
 }
 
+
+void CubeCLI::print_indexes() {
+    printf("\n"
+           "        %2d %2d %2d\n"
+           "        %2d  U %2d\n"
+           "        %2d %2d %2d\n"
+           "\n"
+           "%2d %2d %2d   %2d %2d %2d   %2d %2d %2d   %2d %2d %2d\n"
+           "%2d  L %2d   %2d  F %2d   %2d  R %2d   %2d  B %2d\n"
+           "%2d %2d %2d   %2d %2d %2d   %2d %2d %2d   %2d %2d %2d\n"
+           "\n"
+           "        %2d %2d %2d\n"
+           "        %2d  D %2d\n"
+           "        %2d %2d %2d\n",
+           cube.getCorner(ULB).get_original_id(),
+           cube.getEdge(UB).get_original_id(),
+           cube.getCorner(URB).get_original_id(),
+           cube.getEdge(UL).get_original_id(),
+           cube.getEdge(UR).get_original_id(),
+           cube.getCorner(ULF).get_original_id(),
+           cube.getEdge(UF).get_original_id(),
+           cube.getCorner(URF).get_original_id(),
+
+           cube.getCorner(ULB).get_original_id(),
+           cube.getEdge(UL).get_original_id(),
+           cube.getCorner(ULF).get_original_id(),
+           cube.getCorner(ULF).get_original_id(),
+           cube.getEdge(UF).get_original_id(),
+           cube.getCorner(URF).get_original_id(),
+           cube.getCorner(URF).get_original_id(),
+           cube.getEdge(UR).get_original_id(),
+           cube.getCorner(URB).get_original_id(),
+           cube.getCorner(URB).get_original_id(),
+           cube.getEdge(UB).get_original_id(),
+           cube.getCorner(ULB).get_original_id(),
+
+           cube.getEdge(LB).get_original_id(),
+           cube.getEdge(LF).get_original_id(),
+           cube.getEdge(LF).get_original_id(),
+           cube.getEdge(RF).get_original_id(),
+           cube.getEdge(RF).get_original_id(),
+           cube.getEdge(RB).get_original_id(),
+           cube.getEdge(RB).get_original_id(),
+           cube.getEdge(LB).get_original_id(),
+
+           cube.getCorner(DLB).get_original_id(),
+           cube.getEdge(DL).get_original_id(),
+           cube.getCorner(DLF).get_original_id(),
+           cube.getCorner(DLF).get_original_id(),
+           cube.getEdge(DF).get_original_id(),
+           cube.getCorner(DRF).get_original_id(),
+           cube.getCorner(DRF).get_original_id(),
+           cube.getEdge(DR).get_original_id(),
+           cube.getCorner(DRB).get_original_id(),
+           cube.getCorner(DRB).get_original_id(),
+           cube.getEdge(DB).get_original_id(),
+           cube.getCorner(DLB).get_original_id(),
+
+           cube.getCorner(DLF).get_original_id(),
+           cube.getEdge(DF).get_original_id(),
+           cube.getCorner(DRF).get_original_id(),
+           cube.getEdge(DL).get_original_id(),
+           cube.getEdge(DR).get_original_id(),
+           cube.getCorner(DLB).get_original_id(),
+           cube.getEdge(DB).get_original_id(),
+           cube.getCorner(DRB).get_original_id()
+    );
+}
+
+void CubeCLI::print_states() {
+    printf("\n"
+           "        %2d %2d %2d\n"
+           "        %2d  U %2d\n"
+           "        %2d %2d %2d\n"
+           "\n"
+           "%2d %2d %2d   %2d %2d %2d   %2d %2d %2d   %2d %2d %2d\n"
+           "%2d  L %2d   %2d  F %2d   %2d  R %2d   %2d  B %2d\n"
+           "%2d %2d %2d   %2d %2d %2d   %2d %2d %2d   %2d %2d %2d\n"
+           "\n"
+           "        %2d %2d %2d\n"
+           "        %2d  D %2d\n"
+           "        %2d %2d %2d\n",
+           cube.getCorner(ULB).get_twist_state(),
+           cube.getEdge(UB).get_twist_state(),
+           cube.getCorner(URB).get_twist_state(),
+           cube.getEdge(UL).get_twist_state(),
+           cube.getEdge(UR).get_twist_state(),
+           cube.getCorner(ULF).get_twist_state(),
+           cube.getEdge(UF).get_twist_state(),
+           cube.getCorner(URF).get_twist_state(),
+
+           cube.getCorner(ULB).get_twist_state(),
+           cube.getEdge(UL).get_twist_state(),
+           cube.getCorner(ULF).get_twist_state(),
+           cube.getCorner(ULF).get_twist_state(),
+           cube.getEdge(UF).get_twist_state(),
+           cube.getCorner(URF).get_twist_state(),
+           cube.getCorner(URF).get_twist_state(),
+           cube.getEdge(UR).get_twist_state(),
+           cube.getCorner(URB).get_twist_state(),
+           cube.getCorner(URB).get_twist_state(),
+           cube.getEdge(UB).get_twist_state(),
+           cube.getCorner(ULB).get_twist_state(),
+
+           cube.getEdge(LB).get_twist_state(),
+           cube.getEdge(LF).get_twist_state(),
+           cube.getEdge(LF).get_twist_state(),
+           cube.getEdge(RF).get_twist_state(),
+           cube.getEdge(RF).get_twist_state(),
+           cube.getEdge(RB).get_twist_state(),
+           cube.getEdge(RB).get_twist_state(),
+           cube.getEdge(LB).get_twist_state(),
+
+           cube.getCorner(DLB).get_twist_state(),
+           cube.getEdge(DL).get_twist_state(),
+           cube.getCorner(DLF).get_twist_state(),
+           cube.getCorner(DLF).get_twist_state(),
+           cube.getEdge(DF).get_twist_state(),
+           cube.getCorner(DRF).get_twist_state(),
+           cube.getCorner(DRF).get_twist_state(),
+           cube.getEdge(DR).get_twist_state(),
+           cube.getCorner(DRB).get_twist_state(),
+           cube.getCorner(DRB).get_twist_state(),
+           cube.getEdge(DB).get_twist_state(),
+           cube.getCorner(DLB).get_twist_state(),
+
+           cube.getCorner(DLF).get_twist_state(),
+           cube.getEdge(DF).get_twist_state(),
+           cube.getCorner(DRF).get_twist_state(),
+           cube.getEdge(DL).get_twist_state(),
+           cube.getEdge(DR).get_twist_state(),
+           cube.getCorner(DLB).get_twist_state(),
+           cube.getEdge(DB).get_twist_state(),
+           cube.getCorner(DRB).get_twist_state()
+    );
+}
