@@ -191,6 +191,7 @@ void SequenceParser::perform_command(Cube &cube, const std::string &command) {
                 }
                 break;
             }
+
             default:
                 break;
         }
@@ -221,20 +222,30 @@ void SequenceParser::orient_z() {
     commands['U'] = tmp;
 }
 
-void SequenceParser::slice_m(Cube& cube) {
+void SequenceParser::slice_m(Cube &cube) {
     orient_x();
     cube.turn_L(true);
     cube.turn_R();
 }
 
-void SequenceParser::slice_e(Cube& cube) {
+void SequenceParser::slice_e(Cube &cube) {
     orient_y();
     cube.turn_U();
     cube.turn_D(true);
 }
 
-void SequenceParser::slice_s(Cube& cube) {
+void SequenceParser::slice_s(Cube &cube) {
     orient_z();
     cube.turn_B();
     cube.turn_F(true);
 }
+
+SequenceParser &SequenceParser::operator=(const SequenceParser &other) {
+    if (this != & other) {
+        this->commands = other.commands;
+    }
+
+    return *this;
+}
+
+SequenceParser::SequenceParser(const SequenceParser &other) = default;

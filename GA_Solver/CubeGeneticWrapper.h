@@ -2,10 +2,12 @@
 
 #include <string>
 #include "../Cube/Cube.h"
+#include "../Cube/SequenceParser.h"
 
 struct CubeGeneticWrapper {
     Cube cube;
     std::string gene;
+    SequenceParser parser;
 
     explicit CubeGeneticWrapper(const Cube& origin);
     CubeGeneticWrapper(const CubeGeneticWrapper& other);

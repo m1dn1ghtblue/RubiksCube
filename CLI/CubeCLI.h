@@ -23,11 +23,14 @@ private:
     std::unordered_map<E_POS, std::array<char, 2>> edgeColormap;
     std::array<char, 6> surfaceColormap{};
 
-    std::tuple<char, char> get_edge_colors(E_POS position);
-    std::tuple<char, char, char> get_corner_colors(C_POS position);
+    std::tuple<char, char> get_edge_colors(E_POS position, const Cube& cube);
+    std::tuple<char, char, char> get_corner_colors(C_POS position, const Cube& cube);
 
 public:
     CubeCLI();
+    void print_cube(const Cube& cube);
     void print_cube();
     void loop();
+
+    static void print_states(const Cube &cube);
 };

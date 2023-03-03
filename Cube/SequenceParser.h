@@ -20,6 +20,8 @@ private:
 
 public:
     SequenceParser();
+    SequenceParser(const SequenceParser& other);
+    SequenceParser& operator=(const SequenceParser& other);
 
     void perform_sequence(Cube& cube, const std::string& sequence);
     void perform_command(Cube& cube, const std::string& command);

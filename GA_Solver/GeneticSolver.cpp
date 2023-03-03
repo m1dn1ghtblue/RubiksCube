@@ -4,14 +4,13 @@
 #include <iostream>
 
 GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
-    std::srand(std::time(0));
+    std::srand(std::time(nullptr));
 
-    parser = SequenceParser();
     current_population = 0;
 
     population.resize(POPULATION_SIZE, CubeGeneticWrapper(cube));
 
-    mutationTypes = {'A', 'B', 'C', 'D', 'E'};
+    mutationTypes = {'A' , 'B', 'C', 'D', 'E'};
 
     moves = {"U", "U'", "U2",
              "D", "D'", "D2",
@@ -27,21 +26,21 @@ GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
                     "y", "y'", "y2",
                     "z", "z'", "z2"};
 
-    combos = {"R U R' U'"};
+    combos = {"R"};
 }
 
 unsigned int GeneticSolver::fitness(const Cube &cubeState) {
     unsigned int fitness = 0;
     for (int i = 0; i < 8; ++i) {
         CornerCubie corner = cubeState.getCorner(static_cast<C_POS>(i));
-        if (corner.get_original_id() == i && corner.get_twist_state() == 0) {
+        if ((corner.get_original_id() == i) && (corner.get_twist_state() == 0)) {
             fitness++;
         }
     }
 
     for (int i = 0; i < 12; ++i) {
         EdgeCubie edge = cubeState.getEdge(static_cast<E_POS>(i));
-        if (edge.get_original_id() == i && edge.get_twist_state() == 0) {
+        if ((edge.get_original_id() == i) && (edge.get_twist_state() == 0)) {
             fitness++;
         }
     }
@@ -51,25 +50,29 @@ unsigned int GeneticSolver::fitness(const Cube &cubeState) {
 
 void GeneticSolver::perform_random_move(CubeGeneticWrapper &cubeWrapper) {
     std::string move = get_random_element(moves);
-    parser.perform_command(cubeWrapper.cube, move);
+    cubeWrapper.parser.perform_command(cubeWrapper.cube, move);
     cubeWrapper.append_gene(move);
 }
 
 void GeneticSolver::perform_random_orientation(CubeGeneticWrapper &cubeWrapper) {
     std::string orientation = get_random_element(orientations);
-    parser.perform_command(cubeWrapper.cube, orientation);
+    cubeWrapper.parser.perform_command(cubeWrapper.cube, orientation);
     cubeWrapper.append_gene(orientation);
 }
 
 void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
     std::string combo = get_random_element(combos);
-    parser.perform_sequence(cubeWrapper.cube, combo);
+    cubeWrapper.parser.perform_sequence(cubeWrapper.cube, combo);
     cubeWrapper.append_gene(combo);
 }
 
 std::string GeneticSolver::solve() {
-    //TODO implement solve method
-    throw "Not implemented";
+    while (fitness(population[0].cube) != MAX_FITNESS) {
+        std::cout << "population:" << current_population << " max fitness: " << fitness(population[0].cube) << "\n";
+        evolve();
+    }
+
+    return population[0].gene;
 }
 
 void GeneticSolver::evolve() {
@@ -81,6 +84,8 @@ void GeneticSolver::evolve() {
         population[i] = get_random_element(population, ELITE_COUNT);
         mutate(population[i]);
     }
+
+    current_population++;
 }
 
 template<typename T>
