@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <string>
 #include "Cube.h"
 
 enum COMMAND { U, B, L, R, D, F, X, Y, Z, M, E, S };
@@ -16,6 +17,7 @@ private:
     void slice_m(Cube& cube);
     void slice_e(Cube& cube);
     void slice_s(Cube& cube);
+
 public:
     SequenceParser();
 
