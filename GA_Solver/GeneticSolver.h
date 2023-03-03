@@ -3,6 +3,7 @@
 #include "../Cube/SequenceParser.h"
 #include <vector>
 #include <string>
+#include "CubeGeneticWrapper.h"
 
 class GeneticSolver {
 private:
@@ -18,11 +19,14 @@ private:
     std::vector<std::string> orientations;
     std::vector<std::string> combos;
 
+    std::vector<CubeGeneticWrapper> population;
+
     int current_population;
     void perform_random_move(Cube& cube);
     void perform_random_orientation(Cube& cube);
     void perform_random_combo(Cube& cube);
     void evolve();
+
 
 public:
     explicit GeneticSolver(const Cube& cube);

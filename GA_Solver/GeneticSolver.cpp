@@ -7,6 +7,8 @@ GeneticSolver::GeneticSolver(const Cube& cube) : originalCube(cube) {
     parser = SequenceParser();
     current_population = 0;
 
+    population.resize(POPULATION_SIZE, CubeGeneticWrapper(cube));
+
     moves = {"U", "U'", "U2",
              "D", "D'", "D2",
              "B", "B'", "B2",
