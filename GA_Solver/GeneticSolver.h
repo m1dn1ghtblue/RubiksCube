@@ -6,7 +6,7 @@
 #include "CubeGeneticWrapper.h"
 
 class GeneticSolver {
-private:
+public:
     const unsigned int MAX_FITNESS = 20; // 20 of 26 cubies are movable
     const unsigned int POPULATION_SIZE = 400;
     const unsigned int ELITE_COUNT = 50;
@@ -30,6 +30,7 @@ private:
 
     template<typename T> T get_random_element(std::vector<T> v);
     template<typename T> T get_random_element(std::vector<T> v, size_t limit);
+
 public:
     explicit GeneticSolver(const Cube& cube);
     static unsigned int fitness(const Cube& cubeState);

@@ -1,8 +1,11 @@
 #include "GeneticSolver.h"
 #include <ctime>
 #include <vector>
+#include <iostream>
 
 GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
+    std::srand(std::time(0));
+
     parser = SequenceParser();
     current_population = 0;
 
@@ -82,13 +85,11 @@ void GeneticSolver::evolve() {
 
 template<typename T>
 T GeneticSolver::get_random_element(std::vector<T> v) {
-    std::srand(std::time(nullptr));
     return v[rand() % v.size()];
 }
 
 template<typename T>
 T GeneticSolver::get_random_element(std::vector<T> v, size_t limit) {
-    std::srand(std::time(nullptr));
     return v[rand() % limit];
 }
 
@@ -98,7 +99,7 @@ void GeneticSolver::mutate(CubeGeneticWrapper &cubeWrapper) {
             perform_random_move(cubeWrapper);
             break;
 
-        case 'B:
+        case 'B':
             perform_random_orientation(cubeWrapper);
             break;
 
@@ -111,7 +112,7 @@ void GeneticSolver::mutate(CubeGeneticWrapper &cubeWrapper) {
             perform_random_move(cubeWrapper);
             break;
 
-        case 'E:
+        case 'E':
             perform_random_orientation(cubeWrapper);
             perform_random_combo(cubeWrapper);
             break;
