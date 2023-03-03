@@ -18,16 +18,18 @@ private:
     std::vector<std::string> moves;
     std::vector<std::string> orientations;
     std::vector<std::string> combos;
-
+    std::vector<char> mutationTypes;
     std::vector<CubeGeneticWrapper> population;
 
     int current_population;
-    void perform_random_move(Cube& cube);
-    void perform_random_orientation(Cube& cube);
-    void perform_random_combo(Cube& cube);
+    void perform_random_move(CubeGeneticWrapper& cubeWrapper);
+    void perform_random_orientation(CubeGeneticWrapper& cubeWrapper);
+    void perform_random_combo(CubeGeneticWrapper& cubeWrapper);
     void evolve();
+    void mutate(CubeGeneticWrapper& cubeWrapper);
 
-
+    template<typename T> T get_random_element(std::vector<T> v);
+    template<typename T> T get_random_element(std::vector<T> v, size_t limit);
 public:
     explicit GeneticSolver(const Cube& cube);
     static unsigned int fitness(const Cube& cubeState);
