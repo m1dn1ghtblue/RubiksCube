@@ -8,9 +8,9 @@
 class GeneticSolver {
 public:
     const unsigned int MAX_FITNESS = 20; // 20 of 26 cubies are movable
-    const unsigned int POPULATION_SIZE = 400;
-    const unsigned int ELITE_COUNT = 40;
-    const unsigned int POPULATION_LIMIT = 200;
+    const unsigned int POPULATION_SIZE = 500;
+    const unsigned int ELITE_COUNT = 50;
+    const unsigned int POPULATION_LIMIT = 300;
 
     const Cube originalCube;
 

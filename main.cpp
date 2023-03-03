@@ -8,7 +8,7 @@ int main() {
     Cube cube;
     CubeCLI cli;
     SequenceParser parser;
-    parser.perform_sequence(cube, "F R' U B'");
+    parser.perform_sequence(cube, "B2 R' U R B2 U' L2 R' U L' U2 R U' L R' U L' U2 R U' L U R U2 R' F2 L F' L' U2 L' U2 L F' L' U2 L R' F2 R U B2 F2 D2 B2 L");
     GeneticSolver solver(cube);
 
     std::cout << solver.solve() << "\n";
