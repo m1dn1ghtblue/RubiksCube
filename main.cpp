@@ -7,7 +7,7 @@
 int main() {
     Cube cube;
     CubeCLI cli;
-    SequenceParser::perform_sequence(cube, "U R U' x R' U L' y M S");
+    SequenceParser::perform_sequence(cube, "F U2 L2 B2 F' U L2 U R2 D2 L' B L2 B' R2 U2");
     cli.print_cube(cube);
 
     GeneticSolver solver(cube);

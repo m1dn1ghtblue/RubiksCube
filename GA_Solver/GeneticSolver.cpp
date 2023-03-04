@@ -184,7 +184,12 @@ std::string GeneticSolver::solve() {
 
 void GeneticSolver::evolve() {
     std::sort(population.begin(), population.end(), [](const CubeGeneticWrapper &lhs, const CubeGeneticWrapper &rhs) {
-        return GeneticSolver::fitness(lhs.cube) > GeneticSolver::fitness(rhs.cube);
+        auto lhsFitness = GeneticSolver::fitness(lhs.cube);
+        auto rhsFitness = GeneticSolver::fitness(rhs.cube);
+        if (lhsFitness == rhsFitness) {
+            return lhs.gene.size() < rhs.gene.size();
+        }
+        return lhsFitness > rhsFitness;
     });
 
     for (size_t i = ELITE_COUNT; i < population.size(); ++i) {
