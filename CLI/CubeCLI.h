@@ -30,6 +30,4 @@ public:
     void print_cube(const Cube& cube);
     void print_cube();
     void loop();
-
-    static void print_states(const Cube &cube);
 };

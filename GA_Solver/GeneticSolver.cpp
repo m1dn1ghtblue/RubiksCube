@@ -147,13 +147,13 @@ unsigned int GeneticSolver::fitness(const Cube &cubeState) {
 
 void GeneticSolver::perform_random_move(CubeGeneticWrapper &cubeWrapper) {
     std::string move = get_random_element(moves);
-    cubeWrapper.parser.perform_command(cubeWrapper.cube, move);
+    SequenceParser::perform_command(cubeWrapper.cube, move);
     cubeWrapper.append_gene(move);
 }
 
 void GeneticSolver::perform_random_orientation(CubeGeneticWrapper &cubeWrapper) {
     std::string orientation = get_random_element(orientations);
-    cubeWrapper.parser.perform_command(cubeWrapper.cube, orientation);
+    SequenceParser::perform_command(cubeWrapper.cube, orientation);
     cubeWrapper.append_gene(orientation);
 }
 
@@ -162,7 +162,7 @@ void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
     if (rand() % 2) combo = get_random_element(combos_1);
     else combo = get_random_element(combos_2);
 
-    cubeWrapper.parser.perform_sequence(cubeWrapper.cube, combo);
+    SequenceParser::perform_sequence(cubeWrapper.cube, combo);
     cubeWrapper.append_gene(combo);
 }
 

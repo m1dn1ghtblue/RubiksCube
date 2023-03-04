@@ -24,12 +24,14 @@ Cube::Cube() {
 Cube::Cube(const Cube& other) {
     this->corners = other.corners;
     this->edges = other.edges;
+    this->orientation = other.orientation;
 }
 
 Cube &Cube::operator=(const Cube& other) {
     if (this != &other) {
         this->corners = other.corners;
         this->edges = other.edges;
+        this->orientation = other.orientation;
     }
     return *this;
 }
@@ -270,27 +272,39 @@ void Cube::move_R(bool counterclockwise, bool halfCircle) {
 }
 
 void Cube::move_X(bool counterclockwise, bool halfCircle) {
-    SIDE tmp = orientation[B];
-    orientation[B] = orientation[U];
-    orientation[U] = orientation[F];
-    orientation[F] = orientation[D];
-    orientation[D] = tmp;
+    orient_X();
+    if (halfCircle) {
+        orient_X();
+        return;
+    }
+    if (counterclockwise) {
+        orient_X();
+        orient_X();
+    }
 }
 
 void Cube::move_Y(bool counterclockwise, bool halfCircle) {
-    SIDE tmp = orientation[B];
-    orientation[B] = orientation[L];
-    orientation[L] = orientation[F];
-    orientation[F] = orientation[R];
-    orientation[R] = tmp;
+    orient_Y();
+    if (halfCircle) {
+        orient_Y();
+        return;
+    }
+    if (counterclockwise) {
+        orient_Y();
+        orient_Y();
+    }
 }
 
 void Cube::move_Z(bool counterclockwise, bool halfCircle) {
-    SIDE tmp = orientation[L];
-    orientation[L] = orientation[D];
-    orientation[D] = orientation[R];
-    orientation[R] = orientation[U];
-    orientation[U] = tmp;
+    orient_Z();
+    if (halfCircle) {
+        orient_Z();
+        return;
+    }
+    if (counterclockwise) {
+        orient_Z();
+        orient_Z();
+    }
 }
 
 void Cube::move_M(bool counterclockwise, bool halfCircle) {
@@ -309,6 +323,30 @@ void Cube::move_S(bool counterclockwise, bool halfCircle) {
     move_Z(counterclockwise, halfCircle);
     move_F(!counterclockwise, halfCircle);
     move_B(counterclockwise, halfCircle);
+}
+
+void Cube::orient_X() {
+    SIDE tmp = orientation[B];
+    orientation[B] = orientation[U];
+    orientation[U] = orientation[F];
+    orientation[F] = orientation[D];
+    orientation[D] = tmp;
+}
+
+void Cube::orient_Z() {
+    SIDE tmp = orientation[L];
+    orientation[L] = orientation[D];
+    orientation[D] = orientation[R];
+    orientation[R] = orientation[U];
+    orientation[U] = tmp;
+}
+
+void Cube::orient_Y() {
+    SIDE tmp = orientation[B];
+    orientation[B] = orientation[L];
+    orientation[L] = orientation[F];
+    orientation[F] = orientation[R];
+    orientation[R] = tmp;
 }
 
 

@@ -7,7 +7,6 @@
 struct CubeGeneticWrapper {
     Cube cube;
     std::string gene;
-    SequenceParser parser;
 
     explicit CubeGeneticWrapper(const Cube& origin);
     CubeGeneticWrapper(const CubeGeneticWrapper& other);

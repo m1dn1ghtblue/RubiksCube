@@ -70,6 +70,9 @@ private:
 
     void turn_B2();
 
+    void orient_X();
+    void orient_Z();
+    void orient_Y();
     void move(SIDE side, bool ccw = false, bool half = false);
 
 public:
