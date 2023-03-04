@@ -10,7 +10,7 @@ GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
 
     population.resize(POPULATION_SIZE, CubeGeneticWrapper(originalCube));
 
-    mutationTypes = {'A' , 'B', 'C', 'D', 'E'};
+    mutationTypes = {'A' , 'B', 'C', 'D'};
 
     moves = {"U", "U'", "U2",
              "D", "D'", "D2",
@@ -26,7 +26,7 @@ GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
                     "y", "y'", "y2",
                     "z", "z'", "z2"};
 
-    combos = {/*"U' L' U L U F U' F'",
+    combos_1 = {"U' L' U L U F U' F'",
               "U R U' R' U' F' U F",
               "R U2 R' U R U' R'",
               "R U R' U'",
@@ -104,7 +104,10 @@ GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
               "R U R' y' R2 y' D' R U' R' U R' y D R2",
               "R' U2 R' D' E' R' F' R2 U' R' U R' F R U' F",
               "F R U' R' U' R U R' F' R U R' U' R' F R F'",
-              "x' R U' R' D R U R' y2 D2 R' U R D R' U' R",*/
+              "x' R U' R' D R U R' y2 D2 R' U R D R' U' R"
+    };
+
+    combos_2 = {
               "F' L' B' R' U' R U' B L F R U R' U",
               "F R B L U L' U B' R' F' L' U' L U'",
               "R' U L' U2 R U' L R' U L' U2 R U' L U'",
@@ -155,7 +158,10 @@ void GeneticSolver::perform_random_orientation(CubeGeneticWrapper &cubeWrapper) 
 }
 
 void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
-    std::string combo = get_random_element(combos);
+    std::string combo;
+    if (rand() % 2) combo = get_random_element(combos_1);
+    else combo = get_random_element(combos_2);
+
     cubeWrapper.parser.perform_sequence(cubeWrapper.cube, combo);
     cubeWrapper.append_gene(combo);
 }
@@ -208,19 +214,15 @@ void GeneticSolver::mutate(CubeGeneticWrapper &cubeWrapper) {
             break;
 
         case 'B':
-            perform_random_orientation(cubeWrapper);
-            break;
-
-        case 'C':
             perform_random_combo(cubeWrapper);
             break;
 
-        case 'D':
+        case 'C':
             perform_random_orientation(cubeWrapper);
             perform_random_move(cubeWrapper);
             break;
 
-        case 'E':
+        case 'D':
             perform_random_orientation(cubeWrapper);
             perform_random_combo(cubeWrapper);
             break;

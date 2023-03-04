@@ -8,15 +8,17 @@
 class GeneticSolver {
 public:
     const unsigned int MAX_FITNESS = 20; // 20 of 26 cubies are movable
-    const unsigned int POPULATION_SIZE = 500;
-    const unsigned int ELITE_COUNT = 50;
-    const unsigned int POPULATION_LIMIT = 300;
+    const unsigned int POPULATION_SIZE = 128;
+    const unsigned int ELITE_COUNT = 32;
+    const unsigned int POPULATION_LIMIT = 256;
 
     const Cube originalCube;
 
     std::vector<std::string> moves;
     std::vector<std::string> orientations;
-    std::vector<std::string> combos;
+    std::vector<std::string> combos_1;
+    std::vector<std::string> combos_2;
+
     std::vector<char> mutationTypes;
     std::vector<CubeGeneticWrapper> population;
 

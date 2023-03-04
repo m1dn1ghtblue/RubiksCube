@@ -10,6 +10,15 @@ Cube::Cube() {
     for (int i = 0; i < 12; ++i) {
         edges[i] = EdgeCubie(i);
     }
+
+    orientation = {
+            {U, U},
+            {D, D},
+            {L, L},
+            {R, R},
+            {B, B},
+            {F, F}
+    };
 }
 
 Cube::Cube(const Cube& other) {
@@ -204,4 +213,106 @@ CornerCubie Cube::getCorner(C_POS position) const {
 EdgeCubie Cube::getEdge(E_POS position) const {
     return edges[position];
 }
+
+void Cube::move(SIDE side, bool ccw, bool half) {
+    switch (side) {
+        case U:
+            if (half) turn_U2();
+            else turn_U(ccw);
+            break;
+        case D:
+            if (half) turn_D2();
+            else turn_D(ccw);
+            break;
+        case F:
+            if (half) turn_F2();
+            else turn_F(ccw);
+            break;
+        case B:
+            if (half) turn_B2();
+            else turn_B(ccw);
+            break;
+        case L:
+            if (half) turn_L2();
+            else turn_L(ccw);
+            break;
+        case R:
+            if (half) turn_R2();
+            else turn_R(ccw);
+            break;
+        default:
+            break;
+    }
+}
+
+void Cube::move_U(bool counterclockwise, bool halfCircle) {
+    move(orientation[U], counterclockwise, halfCircle);
+}
+
+void Cube::move_D(bool counterclockwise, bool halfCircle) {
+    move(orientation[D], counterclockwise, halfCircle);
+}
+
+void Cube::move_F(bool counterclockwise, bool halfCircle) {
+    move(orientation[F], counterclockwise, halfCircle);
+}
+
+void Cube::move_B(bool counterclockwise, bool halfCircle) {
+    move(orientation[B], counterclockwise, halfCircle);
+}
+
+void Cube::move_L(bool counterclockwise, bool halfCircle) {
+    move(orientation[L], counterclockwise, halfCircle);
+}
+
+void Cube::move_R(bool counterclockwise, bool halfCircle) {
+    move(orientation[R], counterclockwise, halfCircle);
+}
+
+void Cube::move_X(bool counterclockwise, bool halfCircle) {
+    SIDE tmp = orientation[B];
+    orientation[B] = orientation[U];
+    orientation[U] = orientation[F];
+    orientation[F] = orientation[D];
+    orientation[D] = tmp;
+}
+
+void Cube::move_Y(bool counterclockwise, bool halfCircle) {
+    SIDE tmp = orientation[B];
+    orientation[B] = orientation[L];
+    orientation[L] = orientation[F];
+    orientation[F] = orientation[R];
+    orientation[R] = tmp;
+}
+
+void Cube::move_Z(bool counterclockwise, bool halfCircle) {
+    SIDE tmp = orientation[L];
+    orientation[L] = orientation[D];
+    orientation[D] = orientation[R];
+    orientation[R] = orientation[U];
+    orientation[U] = tmp;
+}
+
+void Cube::move_M(bool counterclockwise, bool halfCircle) {
+    move_X(!counterclockwise, halfCircle);
+    move_R(counterclockwise, halfCircle);
+    move_L(!counterclockwise, halfCircle);
+}
+
+void Cube::move_E(bool counterclockwise, bool halfCircle) {
+    move_Y(!counterclockwise, halfCircle);
+    move_U(counterclockwise, halfCircle);
+    move_D(!counterclockwise, halfCircle);
+}
+
+void Cube::move_S(bool counterclockwise, bool halfCircle) {
+    move_Z(counterclockwise, halfCircle);
+    move_F(!counterclockwise, halfCircle);
+    move_B(counterclockwise, halfCircle);
+}
+
+
+
+
+
 
