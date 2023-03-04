@@ -7,8 +7,10 @@
 int main() {
     Cube cube;
     CubeCLI cli;
+    SequenceParser::perform_sequence(cube, "U R U' x R' U L'  y M S");
     cli.print_cube(cube);
-    SequenceParser::perform_sequence(cube, "x F y B z U");
-    cli.print_cube(cube);
+
+    GeneticSolver solver(cube);
+    std::cout << solver.solve();
     return 0;
 }

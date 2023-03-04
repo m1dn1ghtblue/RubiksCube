@@ -6,7 +6,8 @@
 GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
     std::srand(std::time(nullptr));
 
-    current_population = 0;
+    populationNumber = 0;
+    worldNumber = 0;
 
     population.resize(POPULATION_SIZE, CubeGeneticWrapper(originalCube));
 
@@ -146,21 +147,21 @@ unsigned int GeneticSolver::fitness(const Cube &cubeState) {
 }
 
 void GeneticSolver::perform_random_move(CubeGeneticWrapper &cubeWrapper) {
-    std::string move = get_random_element(moves);
+    std::string move = get_random_element(moves, moves.size());
     SequenceParser::perform_command(cubeWrapper.cube, move);
     cubeWrapper.append_gene(move);
 }
 
 void GeneticSolver::perform_random_orientation(CubeGeneticWrapper &cubeWrapper) {
-    std::string orientation = get_random_element(orientations);
+    std::string orientation = get_random_element(orientations, orientations.size());
     SequenceParser::perform_command(cubeWrapper.cube, orientation);
     cubeWrapper.append_gene(orientation);
 }
 
 void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
     std::string combo;
-    if (rand() % 2) combo = get_random_element(combos_1);
-    else combo = get_random_element(combos_2);
+    if (rand() % 2) combo = get_random_element(combos_1, combos_1.size());
+    else combo = get_random_element(combos_2, combos_2.size());
 
     SequenceParser::perform_sequence(cubeWrapper.cube, combo);
     cubeWrapper.append_gene(combo);
@@ -168,17 +169,16 @@ void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
 
 std::string GeneticSolver::solve() {
     while (fitness(population[0].cube) != MAX_FITNESS) {
-        std::cout << "population:" << current_population << " max fitness: " << fitness(population[0].cube) << "\n";
-        evolve();
-        if (current_population % 16 == 0) {
-            std::cout << population[0].gene << "\n";
-        }
-        if (current_population == POPULATION_LIMIT) {
-            current_population = 0;
+        if (populationNumber % POPULATION_LIMIT == 0) {
+            worldNumber++;
+            populationNumber = 0;
             std::fill(population.begin(), population.end(), CubeGeneticWrapper(originalCube));
         }
+
+        evolve();
     }
 
+    std::cerr << "solution found on world: " << worldNumber << " population: " << populationNumber << "\n";
     return population[0].gene;
 }
 
@@ -187,19 +187,12 @@ void GeneticSolver::evolve() {
         return GeneticSolver::fitness(lhs.cube) > GeneticSolver::fitness(rhs.cube);
     });
 
-
-
     for (size_t i = ELITE_COUNT; i < population.size(); ++i) {
         population[i] = get_random_element(population, ELITE_COUNT);
         mutate(population[i]);
     }
 
-    current_population++;
-}
-
-template<typename T>
-T GeneticSolver::get_random_element(std::vector<T> v) {
-    return v[rand() % v.size()];
+    populationNumber++;
 }
 
 template<typename T>
@@ -208,7 +201,7 @@ T GeneticSolver::get_random_element(std::vector<T> v, size_t limit) {
 }
 
 void GeneticSolver::mutate(CubeGeneticWrapper &cubeWrapper) {
-    switch (get_random_element(mutationTypes)) {
+    switch (get_random_element(mutationTypes, mutationTypes.size())) {
         case 'A':
             perform_random_move(cubeWrapper);
             break;

@@ -8,7 +8,7 @@
 class GeneticSolver {
 public:
     const unsigned int MAX_FITNESS = 20; // 20 of 26 cubies are movable
-    const unsigned int POPULATION_SIZE = 128;
+    const unsigned int POPULATION_SIZE = 156;
     const unsigned int ELITE_COUNT = 32;
     const unsigned int POPULATION_LIMIT = 256;
 
@@ -22,14 +22,15 @@ public:
     std::vector<char> mutationTypes;
     std::vector<CubeGeneticWrapper> population;
 
-    int current_population;
+    unsigned int populationNumber;
+    unsigned int worldNumber;
+
     void perform_random_move(CubeGeneticWrapper& cubeWrapper);
     void perform_random_orientation(CubeGeneticWrapper& cubeWrapper);
     void perform_random_combo(CubeGeneticWrapper& cubeWrapper);
     void evolve();
     void mutate(CubeGeneticWrapper& cubeWrapper);
 
-    template<typename T> T get_random_element(std::vector<T> v);
     template<typename T> T get_random_element(std::vector<T> v, size_t limit);
 
 public:
