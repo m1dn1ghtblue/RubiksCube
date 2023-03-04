@@ -2,6 +2,7 @@
 #include <ctime>
 #include <vector>
 #include <iostream>
+#include <chrono>
 
 GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
     std::srand(std::time(nullptr));
@@ -168,6 +169,7 @@ void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
 }
 
 std::string GeneticSolver::solve() {
+    auto time_start = std::chrono::high_resolution_clock::now();
     while (fitness(population[0].cube) != MAX_FITNESS) {
         if (populationNumber % POPULATION_LIMIT == 0) {
             worldNumber++;
@@ -177,8 +179,9 @@ std::string GeneticSolver::solve() {
 
         evolve();
     }
+    std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - time_start;
 
-    std::cerr << "solution found on world: " << worldNumber << " population: " << populationNumber << "\n";
+    std::cerr << "solution found on world: " << worldNumber << " population: " << populationNumber << " in " << duration.count() << "s\n";
     return population[0].gene;
 }
 
