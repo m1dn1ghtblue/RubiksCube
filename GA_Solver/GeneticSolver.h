@@ -6,7 +6,7 @@
 #include "CubeGeneticWrapper.h"
 
 class GeneticSolver {
-public:
+private:
     const unsigned int MAX_FITNESS = 20; // 20 of 26 cubies are movable
     const unsigned int POPULATION_SIZE = 156;
     const unsigned int ELITE_COUNT = 32;
