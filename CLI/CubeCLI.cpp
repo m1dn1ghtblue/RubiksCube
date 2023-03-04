@@ -5,7 +5,6 @@
 
 CubeCLI::CubeCLI() {
     cube = Cube();
-    parser = SequenceParser();
 
     surfaceColormap = {'W', 'O', 'G', 'R', 'B', 'Y'};
 
@@ -146,7 +145,7 @@ void CubeCLI::loop() {
     std::string input;
     print_cube();
     while (std::cin >> input) {
-        parser.perform_sequence(cube, input);
+        SequenceParser::perform_sequence(cube, input);
         print_cube();
     }
 }
@@ -155,77 +154,3 @@ void CubeCLI::print_cube() {
     print_cube(cube);
 }
 
-void CubeCLI::print_states(const Cube& cube) {
-    printf("\n-------------------------------------------------------\n"
-           "        %d %d %d\n"
-           "        %d U %d\n"
-           "        %d %d %d\n"
-           "\n"
-           "%d %d %d   %d %d %d   %d %d %d   %d %d %d\n"
-           "%d L %d   %d F %d   %d R %d   %d B %d\n"
-           "%d %d %d   %d %d %d   %d %d %d   %d %d %d\n"
-           "\n"
-           "        %d %d %d\n"
-           "        %d D %d\n"
-           "        %d %d %d\n"
-           "-------------------------------------------------------\n",
-           cube.getCorner(ULB).get_twist_state(),
-           cube.getEdge(UB).get_twist_state(),
-           cube.getCorner(UBR).get_twist_state(),
-           cube.getEdge(UL).get_twist_state(),
-           cube.getEdge(UR).get_twist_state(),
-           cube.getCorner(UFL).get_twist_state(),
-           cube.getEdge(UF).get_twist_state(),
-           cube.getCorner(URF).get_twist_state(),
-
-           cube.getCorner(ULB).get_twist_state(),
-           cube.getEdge(BL).get_twist_state(),
-           cube.getCorner(UFL).get_twist_state(),
-
-           cube.getCorner(UFL).get_twist_state(),
-           cube.getEdge(UF).get_twist_state(),
-           cube.getCorner(URF).get_twist_state(),
-
-           cube.getCorner(URF).get_twist_state(),
-           cube.getEdge(UR).get_twist_state(),
-           cube.getCorner(UBR).get_twist_state(),
-
-           cube.getCorner(UBR).get_twist_state(),
-           cube.getEdge(UB).get_twist_state(),
-           cube.getCorner(ULB).get_twist_state(),
-
-           cube.getEdge(BL).get_twist_state(),
-           cube.getEdge(FL).get_twist_state(),
-           cube.getEdge(FL).get_twist_state(),
-           cube.getEdge(FR).get_twist_state(),
-           cube.getEdge(FR).get_twist_state(),
-           cube.getEdge(BR).get_twist_state(),
-           cube.getEdge(BR).get_twist_state(),
-           cube.getEdge(BL).get_twist_state(),
-
-           cube.getCorner(DBL).get_twist_state(),
-           cube.getEdge(DL).get_twist_state(),
-           cube.getCorner(DLF).get_twist_state(),
-
-           cube.getCorner(DLF).get_twist_state(),
-           cube.getEdge(DF).get_twist_state(),
-           cube.getCorner(DFR).get_twist_state(),
-
-           cube.getCorner(DFR).get_twist_state(),
-           cube.getEdge(DR).get_twist_state(),
-           cube.getCorner(DRB).get_twist_state(),
-
-           cube.getCorner(DRB).get_twist_state(),
-           cube.getEdge(DB).get_twist_state(),
-           cube.getCorner(DBL).get_twist_state(),
-
-           cube.getCorner(DLF).get_twist_state(),
-           cube.getEdge(DF).get_twist_state(),
-           cube.getCorner(DFR).get_twist_state(),
-           cube.getEdge(DL).get_twist_state(),
-           cube.getEdge(DR).get_twist_state(),
-           cube.getCorner(DBL).get_twist_state(),
-           cube.getEdge(DB).get_twist_state(),
-           cube.getCorner(DRB).get_twist_state()
-    );
-}

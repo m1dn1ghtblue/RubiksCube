@@ -17,7 +17,6 @@ enum SURFACE {
 class CubeCLI {
 private:
     Cube cube;
-    SequenceParser parser;
 
     std::unordered_map<C_POS, std::array<char, 3>> cornerColormap;
     std::unordered_map<E_POS, std::array<char, 2>> edgeColormap;
