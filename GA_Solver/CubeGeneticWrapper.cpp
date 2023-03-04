@@ -4,7 +4,7 @@ CubeGeneticWrapper::CubeGeneticWrapper(const Cube &origin) : cube(origin) {
     gene = "";
 }
 
-CubeGeneticWrapper::CubeGeneticWrapper(const CubeGeneticWrapper &other) = default;;
+CubeGeneticWrapper::CubeGeneticWrapper(const CubeGeneticWrapper &other) = default;
 
 CubeGeneticWrapper &CubeGeneticWrapper::operator=(const CubeGeneticWrapper &other) {
     if (this != &other) {

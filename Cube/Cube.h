@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Cubie.h"
-#include <array>
+#include <vector>
 #include <unordered_map>
 
 enum C_POS {
@@ -37,8 +37,8 @@ enum SIDE {
 class Cube {
 private:
     std::unordered_map<SIDE, SIDE> orientation;
-    std::array<CornerCubie, 8> corners;
-    std::array<EdgeCubie, 12> edges;
+    std::vector<CornerCubie> corners;
+    std::vector<EdgeCubie> edges;
 
     void turnClockWise(E_POS edgeUp, E_POS edgeRight, E_POS edgeDown, E_POS edgeLeft,
                        C_POS cornerUpLeft, C_POS cornerUpRight, C_POS cornerDownRight, C_POS cornerDownLeft);
@@ -71,8 +71,11 @@ private:
     void turn_B2();
 
     void orient_X();
+
     void orient_Z();
+
     void orient_Y();
+
     void move(SIDE side, bool ccw = false, bool half = false);
 
 public:
@@ -111,5 +114,5 @@ public:
     [[nodiscard]] CornerCubie getCorner(C_POS position) const;
 
     [[nodiscard]] EdgeCubie getEdge(E_POS position) const;
-
 };
+

@@ -1,5 +1,5 @@
 #pragma once
-#include <array>
+#include <vector>
 #include <unordered_map>
 #include <string>
 #include "../Cube/Cube.h"
@@ -20,7 +20,7 @@ private:
 
     std::unordered_map<C_POS, std::array<char, 3>> cornerColormap;
     std::unordered_map<E_POS, std::array<char, 2>> edgeColormap;
-    std::array<char, 6> surfaceColormap{};
+    std::vector<char> surfaceColormap;
 
     std::tuple<char, char> get_edge_colors(E_POS position, const Cube& cube);
     std::tuple<char, char, char> get_corner_colors(C_POS position, const Cube& cube);

@@ -3,10 +3,12 @@
 
 Cube::Cube() {
     // create corners
+    corners.resize(8);
     for (int i = 0; i < 8; ++i) {
         corners[i] = CornerCubie(i);
     }
     // create edges
+    edges.resize(12);
     for (int i = 0; i < 12; ++i) {
         edges[i] = EdgeCubie(i);
     }
