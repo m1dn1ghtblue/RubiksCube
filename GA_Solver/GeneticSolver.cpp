@@ -173,6 +173,7 @@ std::string GeneticSolver::solve() {
     while (fitness(population[0].cube) != MAX_FITNESS) {
         if (populationNumber % POPULATION_LIMIT == 0) {
             worldNumber++;
+            std::cerr << "started world: " << worldNumber << "\n";
             populationNumber = 0;
             std::fill(population.begin(), population.end(), CubeGeneticWrapper(originalCube));
         }
