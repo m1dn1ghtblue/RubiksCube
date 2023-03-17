@@ -23,7 +23,9 @@ Scene::Scene() {
         throw GraphicException("Failed to initialize GLEW");
     }
 
+#ifdef DEBUG_LOG
     std::cerr << glGetString(GL_VERSION) << "\n";
+#endif
 }
 
 Scene::~Scene() {
