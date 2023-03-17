@@ -1,8 +1,8 @@
 #pragma once
-
+#include "Cube.h"
+#include "SequenceParser.h"
 #include <string>
-#include "../Cube/Cube.h"
-#include "../Cube/SequenceParser.h"
+
 
 struct CubeGeneticWrapper {
     Cube cube;

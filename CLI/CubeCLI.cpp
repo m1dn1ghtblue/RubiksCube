@@ -1,7 +1,7 @@
 #include "CubeCLI.h"
-#include <iostream>
-#include <sstream>
 #include <array>
+#include <iostream>
+
 
 CubeCLI::CubeCLI() {
     cube = Cube();

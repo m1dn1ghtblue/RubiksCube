@@ -1,9 +1,10 @@
 #pragma once
+#include "Cube.h"
+#include "SequenceParser.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
-#include "../Cube/Cube.h"
-#include "../Cube/SequenceParser.h"
+
 
 enum SURFACE {
     U_SURFACE = 0,

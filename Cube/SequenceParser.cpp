@@ -1,6 +1,6 @@
+#include "SequenceParser.h"
 #include <string>
 #include <sstream>
-#include "SequenceParser.h"
 
 void SequenceParser::perform_sequence(Cube &cube, const std::string &sequence) {
     std::istringstream sequenceStream(sequence);

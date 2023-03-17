@@ -1,9 +1,9 @@
 #pragma once
-#include "../Cube/Cube.h"
-#include "../Cube/SequenceParser.h"
+#include "Cube.h"
+#include "SequenceParser.h"
+#include "CubeGeneticWrapper.h"
 #include <vector>
 #include <string>
-#include "CubeGeneticWrapper.h"
 
 class GeneticSolver {
 private:
