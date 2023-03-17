@@ -1,17 +1,19 @@
 #pragma once
 
+#include "CubeModel.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "Shader.h"
 
 class Scene {
 private:
-    const int windowWidth = 1000;
-    const int windowHeight = 800;
+    GLFWwindow* window;
 
-    GLFWwindow *window;
+    CubeModel cubeModel;
+    Shader* shader;
 
 public:
-    Scene();
+    explicit Scene(GLFWwindow *window);
     ~Scene();
 
     void run();

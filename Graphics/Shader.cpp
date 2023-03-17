@@ -132,3 +132,7 @@ void Shader::setMatrixFloat4(const std::string &uniformName, glm::mat4 &matrix) 
     glUniformMatrix4fv(getLocation(uniformName), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
+Shader::~Shader() {
+    glDeleteProgram(rendererId);
+}
+

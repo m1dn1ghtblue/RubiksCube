@@ -19,6 +19,8 @@ private:
 
 public:
     Shader(const std::string& vertexSourcePath, const std::string& fragmentSourcePath);
+    ~Shader();
+
     void use() const;
 
     // to set uniforms don't forget to call program.use() before
