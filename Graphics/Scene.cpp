@@ -1,9 +1,11 @@
 #include "Scene.h"
 #include "WindowInitializer.h"
 #include "glm/gtc/matrix_transform.hpp"
+#include "stb_image/stb_image.h"
 
 Scene::Scene(GLFWwindow *window) : window(window){
     shader = new Shader("Graphics/resources/shaders/vertexShader.glsl", "Graphics/resources/shaders/fragmentShader.glsl");
+    borderMap = new Texture("Graphics/resources/textures/borders.jpg");
     lastFrame = 0.0f;
 }
 
@@ -13,11 +15,12 @@ Scene::~Scene() {
 
 void Scene::run() {
     glEnable(GL_DEPTH_TEST);
-    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
     shader->use();
     shader->setMatrixFloat4("uProjection", projection);
+
+    borderMap->bind();
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -27,8 +30,10 @@ void Scene::run() {
         shader->use();
         glm::mat4 view = camera.getView();
         shader->setMatrixFloat4("uView", view);
+
         cubeModel.bind();
         auto positions = cubeModel.getPositions();
+
         for (int i = 0; i < positions.size(); ++i) {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, positions[i]);

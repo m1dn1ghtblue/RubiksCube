@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include "Shader.h"
 #include "Camera.h"
+#include "Texture.h"
 
 class Scene {
 private:
@@ -15,6 +16,7 @@ private:
     CubeModel cubeModel;
     Shader* shader;
     Camera camera;
+    Texture* borderMap;
 
     void processInput();
     float lastFrame;
