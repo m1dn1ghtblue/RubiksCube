@@ -28,9 +28,10 @@ void Scene::run() {
         glm::mat4 view = camera.getView();
         shader->setMatrixFloat4("uView", view);
         cubeModel.bind();
-        for (int i = 0; i < 26; ++i) {
+        auto positions = cubeModel.getPositions();
+        for (int i = 0; i < positions.size(); ++i) {
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
+            model = glm::translate(model, positions[i]);
             shader->setMatrixFloat4("uModel", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }

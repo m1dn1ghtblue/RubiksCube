@@ -30,3 +30,7 @@ CubeModel::~CubeModel() {
 void CubeModel::bind() const {
     glBindVertexArray(vaoRendererId);
 }
+
+std::vector<glm::vec3> CubeModel::getPositions() {
+    return cubePositions;
+}
