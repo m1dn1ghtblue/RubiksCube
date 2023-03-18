@@ -3,14 +3,15 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "iostream"
 
-Camera::Camera() {
-    cameraPosition = glm::vec3(0.0f, 0.0f, radius);
-
-    yaw = 90.0f;
-    pitch = 0.0f;
+Camera::Camera() {;
+    yaw = -60.0f;
+    pitch = 30.0f;
 
     target = glm::vec3(0.0f, 0.0f, 0.0f);
     cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+    cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+    updatePosition();
 }
 
 void Camera::rotate(float delta) {

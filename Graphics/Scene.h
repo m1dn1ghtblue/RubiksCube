@@ -6,12 +6,11 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "Window.h"
 
 class Scene {
 private:
-
-
-    GLFWwindow* window;
+    Window window;
 
     CubeModel cubeModel;
     Shader* shader;
@@ -24,8 +23,7 @@ private:
     float deltaTime();
 
 public:
-    explicit Scene(GLFWwindow *window);
-    ~Scene();
+    explicit Scene(const Window& window);
 
     void run();
 };

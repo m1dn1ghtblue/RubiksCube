@@ -1,9 +1,9 @@
 #include <iostream>
 #include "Graphics/Scene.h"
-#include "Graphics/WindowInitializer.h"
+#include "Graphics/Window.h"
 
 int main() {
-    GLFWwindow* window = WindowInitializer::init(800, 600);
+    Window window(800, 600);
     Scene scene(window);
     scene.run();
 
