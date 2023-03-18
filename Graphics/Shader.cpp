@@ -128,7 +128,7 @@ void Shader::setInt4(const std::string &uniformName, int v1, int v2, int v3, int
     glUniform4i(getLocation(uniformName), v1, v2, v3, v4);
 }
 
-void Shader::setMatrixFloat4(const std::string &uniformName, glm::mat4 matrix) {
+void Shader::setMatrixFloat4(const std::string &uniformName, glm::mat4& matrix) {
     glUniformMatrix4fv(getLocation(uniformName), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 

@@ -18,8 +18,6 @@ void Scene::run() {
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
     shader->use();
     shader->setMatrixFloat4("uProjection", projection);
-    glm::mat4 model = glm::mat4(1.0f);
-    shader->setMatrixFloat4("uModel", model);
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -27,10 +25,16 @@ void Scene::run() {
         processInput();
 
         shader->use();
-        shader->setMatrixFloat4("uView", camera.getView());
-
+        glm::mat4 view = camera.getView();
+        shader->setMatrixFloat4("uView", view);
         cubeModel.bind();
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        for (int i = 0; i < 26; ++i) {
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, cubePositions[i]);
+            shader->setMatrixFloat4("uModel", model);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
 
         glfwSwapBuffers(window);
         glfwPollEvents();

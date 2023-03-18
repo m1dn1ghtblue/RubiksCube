@@ -34,6 +34,6 @@ public:
     void setInt3(const std::string& uniformName, int v1, int v2, int v3);
     void setInt4(const std::string& uniformName, int v1, int v2, int v3, int v4);
 
-    void setMatrixFloat4(const std::string& uniformName, glm::mat4 matrix);
+    void setMatrixFloat4(const std::string& uniformName, glm::mat4& matrix);
 };
 

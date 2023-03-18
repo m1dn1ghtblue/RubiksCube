@@ -5,7 +5,7 @@
 class Camera {
 private:
     const float speed = 100.0f;
-    const float radius = 3.0f;
+    const float radius = 10.0f;
 
     glm::vec3 cameraPosition;
 
