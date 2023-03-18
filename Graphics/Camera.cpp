@@ -1,32 +1,47 @@
 #include "Camera.h"
 #include <cmath>
 #include "glm/gtc/matrix_transform.hpp"
-
-const float FullCircle = float(2.0f * M_PI);
+#include "iostream"
 
 Camera::Camera() {
-    Xpos = 0.0f;
-    Zpos = radius;
-    angle = 0.0f;
+    cameraPosition = glm::vec3(0.0f, 0.0f, radius);
+
+    yaw = 90.0f;
+    pitch = 0.0f;
 
     target = glm::vec3(0.0f, 0.0f, 0.0f);
     cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 }
 
 void Camera::rotate(float delta) {
-    angle -= delta * speed;
-    if (angle < 0.0f) {
-        angle = FullCircle + angle;
+    yaw += delta * speed;
+    if (yaw < 0.0f) {
+        yaw += 360.0f;
     }
-    else if (angle > FullCircle) {
-        angle -= FullCircle;
+    if (yaw > 360.0f) {
+        yaw -= 360.0f;
     }
 
-    Xpos = sin(angle) * radius;
-    Zpos = cos(angle) * radius;
+    updatePosition();
 }
 
 glm::mat4 Camera::getView() {
-    return glm::lookAt(glm::vec3(Xpos, 0.0, Zpos), target, cameraUp);
+    return glm::lookAt(cameraPosition, target, cameraUp);
+}
+
+void Camera::rotatePitch(float delta) {
+    pitch += delta * speed;
+    pitch = std::min(std::max(pitch, -89.0f), 89.0f);
+
+    updatePosition();
+}
+
+void Camera::updatePosition() {
+    float yawRad = glm::radians(yaw);
+    float pitchRad = glm::radians(pitch);
+
+    cameraPosition.x = cos(yawRad) * radius * cos(pitchRad);
+    cameraPosition.y = sin(pitchRad) * radius;
+    cameraPosition.z = sin(yawRad) * radius * cos(pitchRad);
 }
 

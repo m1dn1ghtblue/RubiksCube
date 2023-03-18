@@ -45,6 +45,12 @@ void Scene::processInput() {
     if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
         camera.rotate(-delta);
     }
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+        camera.rotatePitch(delta);
+    }
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+        camera.rotatePitch(-delta);
+    }
 }
 
 float Scene::deltaTime() {
