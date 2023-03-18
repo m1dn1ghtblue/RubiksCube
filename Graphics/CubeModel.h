@@ -6,7 +6,7 @@
 class CubeModel {
 private:
     const float vertices[8 * 6 * 6] = {
-        // coordinates              // color        // texture coord
+        // coordinates          // color        // texture coord
         -0.5f, -0.5f, -0.5f,    0.0f, 1.0f, 0.0f,   0.0f, 0.0f,
         0.5f, -0.5f, -0.5f,     0.0f, 1.0f, 0.0f,   1.0f, 0.0f,
         -0.5f, 0.5f, -0.5f,     0.0f, 1.0f, 0.0f,   0.0f, 1.0f,

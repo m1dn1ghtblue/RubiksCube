@@ -11,16 +11,15 @@ Scene::Scene(const Window& window) : window(window){
 void Scene::run() {
     glEnable(GL_DEPTH_TEST);
 
-
-
     borderMap->bind();
+    glClearColor(0.13f, 0.34f, 0.48f, 1.0f);
 
     while (!glfwWindowShouldClose(window.getGlfwWindow())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         processInput();
 
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), window.sizeRatio(), 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), window.sizeRatio(), 0.1f, 30.0f);
         glm::mat4 view = camera.getView();
         shader->use();
         shader->setMatrixFloat4("uView", view);
