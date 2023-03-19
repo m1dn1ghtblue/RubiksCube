@@ -16,6 +16,7 @@ private:
     Shader* shader;
     Camera camera;
     Texture* borderMap;
+    char lastKey = -1;
 
     void processInput(float delta);
     float lastFrame;

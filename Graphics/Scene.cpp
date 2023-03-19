@@ -31,9 +31,6 @@ void Scene::run() {
         cubeModel.bind();
 
         for (int i = 0; i < cubeModel.cubies.size(); ++i) {
-            if (cubeModel.cubies[i].getZ() == 1) {
-                cubeModel.cubies[i].rotateZ(delta * 0.5f * M_PI);
-            }
             glm::mat4 model = cubeModel.cubies[i].getModel();
             shader->setMatrixFloat4("uModel", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -56,6 +53,84 @@ void Scene::processInput(float delta) {
     }
     if (glfwGetKey(glfwWindow, GLFW_KEY_DOWN) == GLFW_PRESS) {
         camera.rotatePitch(-delta);
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_F) == GLFW_PRESS && lastKey != 'f') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.turnF(-0.25f * M_PI);
+        }
+        else {
+            cubeModel.turnF(0.25f * M_PI);
+        }
+        lastKey = 'f';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_F) == GLFW_RELEASE && lastKey == 'f') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_B) == GLFW_PRESS && lastKey != 'b') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.turnB(0.25f * M_PI);
+        }
+        else {
+            cubeModel.turnB(-0.25f * M_PI);
+        }
+        lastKey = 'b';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_B) == GLFW_RELEASE && lastKey == 'b') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_L) == GLFW_PRESS && lastKey != 'l') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.turnL(0.25f * M_PI);
+        }
+        else {
+            cubeModel.turnL(-0.25f * M_PI);
+        }
+        lastKey = 'l';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_L) == GLFW_RELEASE && lastKey == 'l') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_R) == GLFW_PRESS && lastKey != 'r') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.turnR(-0.25f * M_PI);
+        }
+        else {
+            cubeModel.turnR(0.25f * M_PI);
+        }
+        lastKey = 'r';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_R) == GLFW_RELEASE && lastKey == 'r') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_U) == GLFW_PRESS && lastKey != 'u') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.turnU(-0.25f * M_PI);
+        }
+        else {
+            cubeModel.turnU(0.25f * M_PI);
+        }
+        lastKey = 'u';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_U) == GLFW_RELEASE && lastKey == 'u') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_D) == GLFW_PRESS && lastKey != 'd') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.turnD(-0.25f * M_PI);
+        }
+        else {
+            cubeModel.turnD(0.25f * M_PI);
+        }
+        lastKey = 'd';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_D) == GLFW_RELEASE && lastKey == 'd') {
+        lastKey = -1;
     }
 }
 

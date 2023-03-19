@@ -24,6 +24,14 @@ CubeModel::CubeModel() {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+
+    for (int x = -1; x <= 1; ++x) {
+        for (int y = -1; y <= 1; ++y) {
+            for (int z = -1; z <= 1; ++z) {
+                cubies.emplace_back(x, y, z);
+            }
+        }
+    }
 }
 
 CubeModel::~CubeModel() {
@@ -33,4 +41,52 @@ CubeModel::~CubeModel() {
 
 void CubeModel::bind() const {
     glBindVertexArray(vaoRendererId);
+}
+
+void CubeModel::turnF(float angle) {
+    for (auto & cubie : cubies) {
+        if(cubie.getZ() == -1) {
+            cubie.rotateZ(angle);
+        }
+    }
+}
+
+void CubeModel::turnB(float angle) {
+    for (auto & cubie : cubies) {
+        if(cubie.getZ() == 1) {
+            cubie.rotateZ(angle);
+        }
+    }
+}
+
+void CubeModel::turnL(float angle) {
+    for (auto & cubie : cubies) {
+        if(cubie.getX() == 1) {
+            cubie.rotateX(angle);
+        }
+    }
+}
+
+void CubeModel::turnR(float angle) {
+    for (auto & cubie : cubies) {
+        if(cubie.getX() == -1) {
+            cubie.rotateX(angle);
+        }
+    }
+}
+
+void CubeModel::turnU(float angle) {
+    for (auto & cubie : cubies) {
+        if(cubie.getY() == 1) {
+            cubie.rotateY(angle);
+        }
+    }
+}
+
+void CubeModel::turnD(float angle) {
+    for (auto & cubie : cubies) {
+        if(cubie.getY() == -1) {
+            cubie.rotateY(angle);
+        }
+    }
 }

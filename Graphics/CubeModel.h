@@ -62,35 +62,14 @@ public:
 
     void bind() const;
 
-    std::vector<Cubie> cubies = {
-            Cubie(0, 0, 1),
-            Cubie(-1, 0, 1),
-            Cubie(1, 0, 1),
-            Cubie(-1, 0, 0),
-            Cubie(1, 0, 0),
-            Cubie(0, 0, -1),
-            Cubie(-1, 0, -1),
-            Cubie(1, 0, -1),
+    std::vector<Cubie> cubies;
 
-            Cubie(0, 1, 1),
-            Cubie(-1, 1, 1),
-            Cubie(1, 1, 1),
-            Cubie(0, 1, 0),
-            Cubie(-1, 1, 0),
-            Cubie(1, 1, 0),
-            Cubie(0, 1, -1),
-            Cubie(-1, 1, -1),
-            Cubie(1, 1, -1),
+    void turnF(float angle);
+    void turnB(float angle);
+    void turnL(float angle);
+    void turnR(float angle);
+    void turnU(float angle);
+    void turnD(float angle);
 
-            Cubie(0, -1, 1),
-            Cubie(-1, -1, 1),
-            Cubie(1, -1, 1),
-            Cubie(0, -1, 0),
-            Cubie(-1, -1, 0),
-            Cubie(1, -1, 0),
-            Cubie(0, -1, -1),
-            Cubie(-1, -1, -1),
-            Cubie(1, -1, -1)
-    };
 };
 
