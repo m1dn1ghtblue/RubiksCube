@@ -31,8 +31,8 @@ void Scene::run() {
         cubeModel.bind();
 
         for (int i = 0; i < cubeModel.cubies.size(); ++i) {
-            if (cubeModel.cubies[i].getY() == 1) {
-                cubeModel.cubies[i].rotateY(delta * 0.5f * M_PI);
+            if (cubeModel.cubies[i].getZ() == 1) {
+                cubeModel.cubies[i].rotateZ(delta * 0.5f * M_PI);
             }
             glm::mat4 model = cubeModel.cubies[i].getModel();
             shader->setMatrixFloat4("uModel", model);

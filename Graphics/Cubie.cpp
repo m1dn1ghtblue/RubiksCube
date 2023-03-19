@@ -20,7 +20,7 @@ void Cubie::rotateY(float angle) {
 }
 
 void Cubie::rotateZ(float angle) {
-    model = glm::rotate(model, angle, glm::vec3(1.0f, 0.0f, 1.0f));
+    model = glm::rotate(model, angle, glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 int Cubie::getX() const {
