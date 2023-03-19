@@ -17,7 +17,7 @@ private:
     Camera camera;
     Texture* borderMap;
 
-    void processInput();
+    void processInput(float delta);
     float lastFrame;
 
     float deltaTime();

@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "stb_image/stb_image.h"
+#include "iostream"
 
 Scene::Scene(const Window& window) : window(window){
     shader = new Shader("Graphics/resources/shaders/vertexShader.glsl", "Graphics/resources/shaders/fragmentShader.glsl");
@@ -15,9 +16,11 @@ void Scene::run() {
     glClearColor(0.13f, 0.34f, 0.48f, 1.0f);
 
     while (!glfwWindowShouldClose(window.getGlfwWindow())) {
+        float delta = deltaTime();
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        processInput();
+        processInput(delta);
 
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), window.sizeRatio(), 0.1f, 30.0f);
         glm::mat4 view = camera.getView();
@@ -26,23 +29,22 @@ void Scene::run() {
         shader->setMatrixFloat4("uProjection", projection);
 
         cubeModel.bind();
-        auto positions = cubeModel.getPositions();
 
-        for (auto & position : positions) {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, position);
+        for (int i = 0; i < cubeModel.cubies.size(); ++i) {
+            if (cubeModel.cubies[i].getY() == 1) {
+                cubeModel.cubies[i].rotateY(delta * 0.5f * M_PI);
+            }
+            glm::mat4 model = cubeModel.cubies[i].getModel();
             shader->setMatrixFloat4("uModel", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-
         glfwSwapBuffers(window.getGlfwWindow());
         glfwPollEvents();
     }
 }
 
-void Scene::processInput() {
+void Scene::processInput(float delta) {
     GLFWwindow* glfwWindow = window.getGlfwWindow();
-    float delta = deltaTime();
     if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT) == GLFW_PRESS) {
         camera.rotate(delta);
     }

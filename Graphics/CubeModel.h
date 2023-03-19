@@ -2,6 +2,7 @@
 #include "GL/glew.h"
 #include "glm/glm.hpp"
 #include <vector>
+#include "Cubie.h"
 
 class CubeModel {
 private:
@@ -50,44 +51,46 @@ private:
         0.5f, 0.5f, 0.5f,       1.0f, 1.0f, 1.0f,   1.0f, 1.0f
     };
 
-    std::vector<glm::vec3> cubePositions = {
-            glm::vec3(0.0f, 0.0f, 1.0f),
-            glm::vec3(-1.0f, 0.0f, 1.0f),
-            glm::vec3(1.0f, 0.0f, 1.0f),
-            glm::vec3(-1.0f, 0.0f, 0.0f),
-            glm::vec3(1.0f, 0.0f, 0.0f),
-            glm::vec3(0.0f, 0.0f, -1.0f),
-            glm::vec3(-1.0f, 0.0f, -1.0f),
-            glm::vec3(1.0f, 0.0f, -1.0f),
 
-            glm::vec3(0.0f, 1.0f, 1.0f),
-            glm::vec3(-1.0f, 1.0f, 1.0f),
-            glm::vec3(1.0f, 1.0f, 1.0f),
-            glm::vec3(0.0f, 1.0f, 0.0f),
-            glm::vec3(-1.0f, 1.0f, 0.0f),
-            glm::vec3(1.0f, 1.0f, 0.0f),
-            glm::vec3(0.0f, 1.0f, -1.0f),
-            glm::vec3(-1.0f, 1.0f, -1.0f),
-            glm::vec3(1.0f, 1.0f, -1.0f),
-
-            glm::vec3(0.0f, -1.0f, 1.0f),
-            glm::vec3(-1.0f, -1.0f, 1.0f),
-            glm::vec3(1.0f, -1.0f, 1.0f),
-            glm::vec3(0.0f, -1.0f, 0.0f),
-            glm::vec3(-1.0f, -1.0f, 0.0f),
-            glm::vec3(1.0f, -1.0f, 0.0f),
-            glm::vec3(0.0f, -1.0f, -1.0f),
-            glm::vec3(-1.0f, -1.0f, -1.0f),
-            glm::vec3(1.0f, -1.0f, -1.0f),
-    };
 
     unsigned int vboRendererId;
     unsigned int vaoRendererId;
+
 public:
     CubeModel();
     ~CubeModel();
 
     void bind() const;
-    std::vector<glm::vec3> getPositions();
+
+    std::vector<Cubie> cubies = {
+            Cubie(0, 0, 1),
+            Cubie(-1, 0, 1),
+            Cubie(1, 0, 1),
+            Cubie(-1, 0, 0),
+            Cubie(1, 0, 0),
+            Cubie(0, 0, -1),
+            Cubie(-1, 0, -1),
+            Cubie(1, 0, -1),
+
+            Cubie(0, 1, 1),
+            Cubie(-1, 1, 1),
+            Cubie(1, 1, 1),
+            Cubie(0, 1, 0),
+            Cubie(-1, 1, 0),
+            Cubie(1, 1, 0),
+            Cubie(0, 1, -1),
+            Cubie(-1, 1, -1),
+            Cubie(1, 1, -1),
+
+            Cubie(0, -1, 1),
+            Cubie(-1, -1, 1),
+            Cubie(1, -1, 1),
+            Cubie(0, -1, 0),
+            Cubie(-1, -1, 0),
+            Cubie(1, -1, 0),
+            Cubie(0, -1, -1),
+            Cubie(-1, -1, -1),
+            Cubie(1, -1, -1)
+    };
 };
 
