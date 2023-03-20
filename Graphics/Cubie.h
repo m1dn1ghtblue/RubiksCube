@@ -22,4 +22,6 @@ public:
     [[nodiscard]] int getX() const;
     [[nodiscard]] int getY() const;
     [[nodiscard]] int getZ() const;
+
+    void update();
 };

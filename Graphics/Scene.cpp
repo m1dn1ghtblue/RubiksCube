@@ -57,10 +57,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_F) == GLFW_PRESS && lastKey != 'f') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnF(-0.25f * M_PI);
+            cubeModel.turnF(-0.5f * M_PI);
         }
         else {
-            cubeModel.turnF(0.25f * M_PI);
+            cubeModel.turnF(0.5f * M_PI);
         }
         lastKey = 'f';
     }
@@ -70,10 +70,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_B) == GLFW_PRESS && lastKey != 'b') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnB(0.25f * M_PI);
+            cubeModel.turnB(0.5f * M_PI);
         }
         else {
-            cubeModel.turnB(-0.25f * M_PI);
+            cubeModel.turnB(-0.5f * M_PI);
         }
         lastKey = 'b';
     }
@@ -83,10 +83,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_L) == GLFW_PRESS && lastKey != 'l') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnL(0.25f * M_PI);
+            cubeModel.turnL(0.5f * M_PI);
         }
         else {
-            cubeModel.turnL(-0.25f * M_PI);
+            cubeModel.turnL(-0.5f * M_PI);
         }
         lastKey = 'l';
     }
@@ -96,10 +96,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_R) == GLFW_PRESS && lastKey != 'r') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnR(-0.25f * M_PI);
+            cubeModel.turnR(-0.5f * M_PI);
         }
         else {
-            cubeModel.turnR(0.25f * M_PI);
+            cubeModel.turnR(0.5f * M_PI);
         }
         lastKey = 'r';
     }
@@ -109,10 +109,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_U) == GLFW_PRESS && lastKey != 'u') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnU(-0.25f * M_PI);
+            cubeModel.turnU(-0.5f * M_PI);
         }
         else {
-            cubeModel.turnU(0.25f * M_PI);
+            cubeModel.turnU(0.5f * M_PI);
         }
         lastKey = 'u';
     }
@@ -122,10 +122,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_D) == GLFW_PRESS && lastKey != 'd') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnD(-0.25f * M_PI);
+            cubeModel.turnD(-0.5f * M_PI);
         }
         else {
-            cubeModel.turnD(0.25f * M_PI);
+            cubeModel.turnD(0.5f * M_PI);
         }
         lastKey = 'd';
     }
