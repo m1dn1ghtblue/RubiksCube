@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "Window.h"
+#include "Animation.h"
 
 class Scene {
 private:
@@ -16,7 +17,9 @@ private:
     Shader* shader;
     Camera camera;
     Texture* borderMap;
-    char lastKey = -1;
+
+    Animation* animation;
+    const float animationSpeed = 5.0f;
 
     void processInput(float delta);
     float lastFrame;

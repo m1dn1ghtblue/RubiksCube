@@ -6,6 +6,7 @@ class Cubie {
 private:
     glm::vec3 position;
     glm::mat4 rotation;
+    glm::mat4 model;
 
     void update(float angle, glm::vec3 axis);
 
@@ -20,4 +21,8 @@ public:
     void turnX(float angle);
     void turnY(float angle);
     void turnZ(float angle);
+
+    void rotateX(float angle);
+    void rotateY(float angle);
+    void rotateZ(float angle);
 };

@@ -60,6 +60,10 @@ public:
 
     void bind() const;
 
+    void turnX(int layer, float angle);
+    void turnY(int layer, float angle);
+    void turnZ(int layer, float angle);
+
     void rotateX(int layer, float angle);
     void rotateY(int layer, float angle);
     void rotateZ(int layer, float angle);
