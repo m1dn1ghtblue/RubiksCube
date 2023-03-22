@@ -7,9 +7,7 @@ private:
     glm::vec3 position;
     glm::mat4 model;
 
-    int Xpos;
-    int Ypos;
-    int Zpos;
+    glm::mat4 rotation;
 
 public:
     Cubie(int x, int y, int z);

@@ -109,10 +109,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_U) == GLFW_PRESS && lastKey != 'u') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnU(-0.5f * M_PI);
+            cubeModel.turnU(0.5f * M_PI);
         }
         else {
-            cubeModel.turnU(0.5f * M_PI);
+            cubeModel.turnU(-0.5f * M_PI);
         }
         lastKey = 'u';
     }
