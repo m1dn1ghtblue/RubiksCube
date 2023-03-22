@@ -19,7 +19,7 @@ private:
     Texture* borderMap;
 
     Animation* animation;
-    const float animationSpeed = 5.0f;
+    const float animationSpeed = 10.0f;
 
     void processInput(float delta);
     float lastFrame;

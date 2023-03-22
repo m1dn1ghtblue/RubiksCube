@@ -99,6 +99,18 @@ void Scene::processInput(float delta) {
         if (glfwGetKey(glfwWindow, GLFW_KEY_E) == GLFW_PRESS) {
             animation = new TurnY(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS), 0);
         }
+
+        if (glfwGetKey(glfwWindow, GLFW_KEY_X) == GLFW_PRESS) {
+            animation = new TurnXFull(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS));
+        }
+
+        if (glfwGetKey(glfwWindow, GLFW_KEY_Y) == GLFW_PRESS) {
+            animation = new TurnYFull(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS));
+        }
+
+        if (glfwGetKey(glfwWindow, GLFW_KEY_Z) == GLFW_PRESS) {
+            animation = new TurnZFull(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS));
+        }
     }
 }
 
