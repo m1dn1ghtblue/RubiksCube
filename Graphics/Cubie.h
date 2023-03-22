@@ -5,21 +5,19 @@
 class Cubie {
 private:
     glm::vec3 position;
-    glm::mat4 model;
-
     glm::mat4 rotation;
+
+    void update(float angle, glm::vec3 axis);
 
 public:
     Cubie(int x, int y, int z);
 
     [[nodiscard]] glm::mat4 getModel() const;
-    void rotateX(float angle);
-    void rotateY(float angle);
-    void rotateZ(float angle);
-
     [[nodiscard]] int getX() const;
     [[nodiscard]] int getY() const;
     [[nodiscard]] int getZ() const;
 
-    void update();
+    void turnX(float angle);
+    void turnY(float angle);
+    void turnZ(float angle);
 };

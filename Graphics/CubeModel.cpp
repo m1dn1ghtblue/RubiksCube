@@ -46,7 +46,7 @@ void CubeModel::bind() const {
 void CubeModel::rotateX(int layer, float angle) {
     for (auto & cubie : cubies) {
         if(cubie.getX() == layer) {
-            cubie.rotateX(angle);
+            cubie.turnX(angle);
         }
     }
 }
@@ -54,7 +54,7 @@ void CubeModel::rotateX(int layer, float angle) {
 void CubeModel::rotateY(int layer, float angle) {
     for (auto & cubie : cubies) {
         if(cubie.getY() == layer) {
-            cubie.rotateY(angle);
+            cubie.turnY(angle);
         }
     }
 }
@@ -62,7 +62,7 @@ void CubeModel::rotateY(int layer, float angle) {
 void CubeModel::rotateZ(int layer, float angle) {
     for (auto & cubie : cubies) {
         if(cubie.getZ() == layer) {
-            cubie.rotateZ(angle);
+            cubie.turnZ(angle);
         }
     }
 }
