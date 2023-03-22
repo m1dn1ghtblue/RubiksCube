@@ -57,10 +57,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_F) == GLFW_PRESS && lastKey != 'f') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnF(-0.5f * M_PI);
+            cubeModel.rotateZ(-1, -0.5f * M_PI);
         }
         else {
-            cubeModel.turnF(0.5f * M_PI);
+            cubeModel.rotateZ(-1, 0.5f * M_PI);
         }
         lastKey = 'f';
     }
@@ -68,12 +68,25 @@ void Scene::processInput(float delta) {
         lastKey = -1;
     }
 
-    if (glfwGetKey(glfwWindow, GLFW_KEY_B) == GLFW_PRESS && lastKey != 'b') {
+    if (glfwGetKey(glfwWindow, GLFW_KEY_S) == GLFW_PRESS && lastKey != 's') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnB(0.5f * M_PI);
+            cubeModel.rotateZ(0, -0.5f * M_PI);
         }
         else {
-            cubeModel.turnB(-0.5f * M_PI);
+            cubeModel.rotateZ(0, 0.5f * M_PI);
+        }
+        lastKey = 's';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_S) == GLFW_RELEASE && lastKey == 's') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_B) == GLFW_PRESS && lastKey != 'b') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.rotateZ(1, 0.5f * M_PI);
+        }
+        else {
+            cubeModel.rotateZ(1, -0.5f * M_PI);
         }
         lastKey = 'b';
     }
@@ -83,10 +96,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_L) == GLFW_PRESS && lastKey != 'l') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnL(0.5f * M_PI);
+            cubeModel.rotateX(1, 0.5f * M_PI);
         }
         else {
-            cubeModel.turnL(-0.5f * M_PI);
+            cubeModel.rotateX(1, -0.5f * M_PI);
         }
         lastKey = 'l';
     }
@@ -96,10 +109,10 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_R) == GLFW_PRESS && lastKey != 'r') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnR(-0.5f * M_PI);
+            cubeModel.rotateX(-1, -0.5f * M_PI);
         }
         else {
-            cubeModel.turnR(0.5f * M_PI);
+            cubeModel.rotateX(-1, 0.5f * M_PI);
         }
         lastKey = 'r';
     }
@@ -107,12 +120,25 @@ void Scene::processInput(float delta) {
         lastKey = -1;
     }
 
-    if (glfwGetKey(glfwWindow, GLFW_KEY_U) == GLFW_PRESS && lastKey != 'u') {
+    if (glfwGetKey(glfwWindow, GLFW_KEY_M) == GLFW_PRESS && lastKey != 'm') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnU(0.5f * M_PI);
+            cubeModel.rotateX(0, 0.5f * M_PI);
         }
         else {
-            cubeModel.turnU(-0.5f * M_PI);
+            cubeModel.rotateX(0, -0.5f * M_PI);
+        }
+        lastKey = 'm';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_M) == GLFW_RELEASE && lastKey == 'm') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_U) == GLFW_PRESS && lastKey != 'u') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.rotateY(1, 0.5f * M_PI);
+        }
+        else {
+            cubeModel.rotateY(1, -0.5f * M_PI);
         }
         lastKey = 'u';
     }
@@ -122,14 +148,27 @@ void Scene::processInput(float delta) {
 
     if (glfwGetKey(glfwWindow, GLFW_KEY_D) == GLFW_PRESS && lastKey != 'd') {
         if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            cubeModel.turnD(-0.5f * M_PI);
+            cubeModel.rotateY(-1, -0.5f * M_PI);
         }
         else {
-            cubeModel.turnD(0.5f * M_PI);
+            cubeModel.rotateY(-1, 0.5f * M_PI);
         }
         lastKey = 'd';
     }
     if (glfwGetKey(glfwWindow, GLFW_KEY_D) == GLFW_RELEASE && lastKey == 'd') {
+        lastKey = -1;
+    }
+
+    if (glfwGetKey(glfwWindow, GLFW_KEY_E) == GLFW_PRESS && lastKey != 'e') {
+        if (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            cubeModel.rotateY(0, -0.5f * M_PI);
+        }
+        else {
+            cubeModel.rotateY(0, 0.5f * M_PI);
+        }
+        lastKey = 'e';
+    }
+    if (glfwGetKey(glfwWindow, GLFW_KEY_E) == GLFW_RELEASE && lastKey == 'e') {
         lastKey = -1;
     }
 }

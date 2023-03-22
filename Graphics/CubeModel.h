@@ -51,8 +51,6 @@ private:
         0.5f, 0.5f, 0.5f,       1.0f, 1.0f, 1.0f,   1.0f, 1.0f
     };
 
-
-
     unsigned int vboRendererId;
     unsigned int vaoRendererId;
 
@@ -62,14 +60,10 @@ public:
 
     void bind() const;
 
+    void rotateX(int layer, float angle);
+    void rotateY(int layer, float angle);
+    void rotateZ(int layer, float angle);
+
     std::vector<Cubie> cubies;
-
-    void turnF(float angle);
-    void turnB(float angle);
-    void turnL(float angle);
-    void turnR(float angle);
-    void turnU(float angle);
-    void turnD(float angle);
-
 };
 

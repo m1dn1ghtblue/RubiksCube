@@ -43,50 +43,26 @@ void CubeModel::bind() const {
     glBindVertexArray(vaoRendererId);
 }
 
-void CubeModel::turnF(float angle) {
+void CubeModel::rotateX(int layer, float angle) {
     for (auto & cubie : cubies) {
-        if(cubie.getZ() == -1) {
-            cubie.rotateZ(angle);
-        }
-    }
-}
-
-void CubeModel::turnB(float angle) {
-    for (auto & cubie : cubies) {
-        if(cubie.getZ() == 1) {
-            cubie.rotateZ(angle);
-        }
-    }
-}
-
-void CubeModel::turnL(float angle) {
-    for (auto & cubie : cubies) {
-        if(cubie.getX() == 1) {
+        if(cubie.getX() == layer) {
             cubie.rotateX(angle);
         }
     }
 }
 
-void CubeModel::turnR(float angle) {
+void CubeModel::rotateY(int layer, float angle) {
     for (auto & cubie : cubies) {
-        if(cubie.getX() == -1) {
-            cubie.rotateX(angle);
-        }
-    }
-}
-
-void CubeModel::turnU(float angle) {
-    for (auto & cubie : cubies) {
-        if(cubie.getY() == 1) {
+        if(cubie.getY() == layer) {
             cubie.rotateY(angle);
         }
     }
 }
 
-void CubeModel::turnD(float angle) {
+void CubeModel::rotateZ(int layer, float angle) {
     for (auto & cubie : cubies) {
-        if(cubie.getY() == -1) {
-            cubie.rotateY(angle);
+        if(cubie.getZ() == layer) {
+            cubie.rotateZ(angle);
         }
     }
 }
