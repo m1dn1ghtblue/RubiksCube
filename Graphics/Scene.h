@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <string>
 #include "CubeModel.h"
 #include "Shader.h"
 #include "Camera.h"
@@ -10,6 +11,7 @@
 #include "Animation.h"
 #include "Cube.h"
 #include "../GA_Solver/GeneticSolver.h"
+#include <queue>
 
 class Scene {
 private:
@@ -20,9 +22,9 @@ private:
     Camera camera;
     Texture* borderMap;
 
-    Animation* animation;
-    const float animationSpeed = 10.0f;
-    bool solving;
+    std::queue<Animation*> animations;
+    float animationSpeed = 15.0f;
+    char lastKey;
 
     Cube cube;
 
@@ -31,6 +33,8 @@ private:
 
     float deltaTime();
 
+    void performSequence(const std::string& sequence);
+    void performCommand(const std::string& command);
 public:
     explicit Scene(const Window& window);
 
