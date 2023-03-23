@@ -1,8 +1,10 @@
 #pragma once
-#include "GL/glew.h"
-#include "glm/glm.hpp"
+
 #include <string>
 #include <unordered_map>
+#include "GL/glew.h"
+#include "glm/glm.hpp"
+
 
 enum ShaderType { VERTEX = 0, FRAGMENT = 1 };
 

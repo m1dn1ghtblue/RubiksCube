@@ -2,7 +2,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-class Cubie {
+class CubieModel {
 private:
     glm::vec3 position;
     glm::mat4 rotation;
@@ -11,7 +11,7 @@ private:
     void update(float angle, glm::vec3 axis);
 
 public:
-    Cubie(int x, int y, int z);
+    CubieModel(int x, int y, int z);
 
     [[nodiscard]] glm::mat4 getModel() const;
     [[nodiscard]] int getX() const;

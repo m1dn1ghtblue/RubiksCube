@@ -8,6 +8,7 @@ Scene::Scene(const Window& window) : window(window){
     borderMap = new Texture("Graphics/resources/textures/borders.jpg");
     lastFrame = 0.0f;
     animation = nullptr;
+    solving = false;
 }
 
 void Scene::run() {
@@ -38,8 +39,8 @@ void Scene::run() {
 
         cubeModel.bind();
 
-        for (int i = 0; i < cubeModel.cubies.size(); ++i) {
-            glm::mat4 model = cubeModel.cubies[i].getModel();
+        for (auto & cubie : cubeModel.cubies) {
+            glm::mat4 model = cubie.getModel();
             shader->setMatrixFloat4("uModel", model);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
@@ -64,58 +65,77 @@ void Scene::processInput(float delta) {
     }
 
     if (!animation) {
+        bool ccw = (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
+
         if (glfwGetKey(glfwWindow, GLFW_KEY_F) == GLFW_PRESS) {
-            animation = new TurnZ(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS), -1);
+            animation = new TurnZ(cubeModel, ccw, -1);
+            cube.move_F(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_S) == GLFW_PRESS) {
-            animation = new TurnZ(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS), 0);
+            animation = new TurnZ(cubeModel, ccw, 0);
+            cube.move_S(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_B) == GLFW_PRESS) {
-            animation = new TurnZ(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS), 1);
+            animation = new TurnZ(cubeModel, !ccw, 1);
+            cube.move_B(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_L) == GLFW_PRESS) {
-            animation = new TurnX(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS), 1);
+            animation = new TurnX(cubeModel, !ccw, 1);
+            cube.move_L(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_R) == GLFW_PRESS) {
-            animation = new TurnX(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS), -1);
+            animation = new TurnX(cubeModel, ccw, -1);
+            cube.move_R(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_M) == GLFW_PRESS) {
-            animation = new TurnX(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS), 0);
+            animation = new TurnX(cubeModel, !ccw, 0);
+            cube.move_M(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_U) == GLFW_PRESS) {
-            animation = new TurnY(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS), 1);
+            animation = new TurnY(cubeModel, !ccw, 1);
+            cube.move_U(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_D) == GLFW_PRESS) {
-            animation = new TurnY(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS), -1);
+            animation = new TurnY(cubeModel, ccw, -1);
+            cube.move_D(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_E) == GLFW_PRESS) {
-            animation = new TurnY(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS), 0);
+            animation = new TurnY(cubeModel, ccw, 0);
+            cube.move_E(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_X) == GLFW_PRESS) {
-            animation = new TurnXFull(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS));
+            animation = new TurnXFull(cubeModel, ccw);
+            cube.move_X(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_Y) == GLFW_PRESS) {
-            animation = new TurnYFull(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS));
+            animation = new TurnYFull(cubeModel, !ccw);
+            cube.move_Y(ccw, false);
         }
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_Z) == GLFW_PRESS) {
-            animation = new TurnZFull(cubeModel, (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS));
+            animation = new TurnZFull(cubeModel, ccw);
+            cube.move_Z(ccw, false);
+        }
+
+        if (glfwGetKey(glfwWindow, GLFW_KEY_ENTER) == GLFW_PRESS && !solving) {
+            GeneticSolver solver(cube);
+            std::cout << solver.solve();
         }
     }
 }
 
 float Scene::deltaTime() {
-    float currentFrame = (float)glfwGetTime();
+    auto currentFrame = (float)glfwGetTime();
     float deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
     return deltaTime;

@@ -1,7 +1,6 @@
 #include "Camera.h"
 #include <cmath>
 #include "glm/gtc/matrix_transform.hpp"
-#include "iostream"
 
 Camera::Camera() {;
     yaw = -60.0f;

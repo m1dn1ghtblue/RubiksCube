@@ -1,8 +1,8 @@
 #pragma once
+#include <vector>
 #include "GL/glew.h"
 #include "glm/glm.hpp"
-#include <vector>
-#include "Cubie.h"
+#include "CubieModel.h"
 
 class CubeModel {
 private:
@@ -68,6 +68,6 @@ public:
     void rotateY(int layer, float angle);
     void rotateZ(int layer, float angle);
 
-    std::vector<Cubie> cubies;
+    std::vector<CubieModel> cubies;
 };
 

@@ -1,5 +1,4 @@
 #include "Animation.h"
-#include "iostream"
 
 Animation::Animation(CubeModel &cube, bool reverse) : cubeModel(cube), reverse(reverse) {
     angle = 0.5f * M_PI;

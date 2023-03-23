@@ -6,6 +6,5 @@ int main() {
     Window window(800, 600);
     Scene scene(window);
     scene.run();
-
     return 0;
 }
