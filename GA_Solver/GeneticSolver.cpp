@@ -7,6 +7,8 @@
 GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
     std::srand(std::time(nullptr));
 
+    solution = "";
+    solved = false;
     populationNumber = 0;
     worldNumber = 0;
 
@@ -168,7 +170,9 @@ void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
     cubeWrapper.append_gene(combo);
 }
 
-std::string GeneticSolver::solve() {
+void GeneticSolver::solve() {
+    if (solved) return;
+
     auto time_start = std::chrono::high_resolution_clock::now();
     while (fitness(population[0].cube) != MAX_FITNESS) {
         if (populationNumber % POPULATION_LIMIT == 0) {
@@ -183,7 +187,8 @@ std::string GeneticSolver::solve() {
     std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - time_start;
 
     std::cerr << "solution found on world: " << worldNumber << " population: " << populationNumber << " in " << duration.count() << "s\n";
-    return population[0].gene;
+    solution =  population[0].gene;
+    solved = true;
 }
 
 void GeneticSolver::evolve() {
@@ -232,6 +237,13 @@ void GeneticSolver::mutate(CubeGeneticWrapper &cubeWrapper) {
         default:
             break;
     }
+}
+
+std::string GeneticSolver::getSolution() {
+    if (!solved) {
+        solve();
+    }
+    return solution;
 }
 
 

@@ -32,9 +32,12 @@ private:
     void mutate(CubeGeneticWrapper& cubeWrapper);
 
     template<typename T> T get_random_element(std::vector<T> v, size_t limit);
+    std::string solution;
+    bool solved;
 
 public:
     explicit GeneticSolver(const Cube& cube);
     static unsigned int fitness(const Cube& cubeState);
-    std::string solve();
+    void solve();
+    std::string getSolution();
 };

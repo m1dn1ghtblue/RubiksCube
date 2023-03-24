@@ -4,12 +4,17 @@
 #include "iostream"
 #include "SequenceParser.h"
 #include "sstream"
+#include <future>
+#include <thread>
+
 
 Scene::Scene(const Window& window) : window(window){
     shader = new Shader("Graphics/resources/shaders/vertexShader.glsl", "Graphics/resources/shaders/fragmentShader.glsl");
     borderMap = new Texture("Graphics/resources/textures/borders.jpg");
     lastFrame = 0.0f;
     lastKey = -1;
+    solving = false;
+    solverThread = nullptr;
 }
 
 void Scene::run() {
@@ -30,6 +35,12 @@ void Scene::run() {
         shader->use();
         shader->setMatrixFloat4("uView", view);
         shader->setMatrixFloat4("uProjection", projection);
+
+        if (solverThread && !solving) {
+            solverThread->join();
+            delete(solverThread);
+            solverThread = nullptr;
+        }
 
         if (!animations.empty()) {
             animations.front()->update(animationSpeed * delta);
@@ -66,7 +77,7 @@ void Scene::processInput(float delta) {
         camera.rotatePitch(-delta);
     }
 
-    if (animations.empty()) {
+    if (animations.empty() && !solving) {
         bool ccw = (glfwGetKey(glfwWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_F) == GLFW_PRESS && lastKey != 'f') {
@@ -155,14 +166,18 @@ void Scene::processInput(float delta) {
 
         if (glfwGetKey(glfwWindow, GLFW_KEY_ENTER) == GLFW_PRESS && lastKey != 0) {
             lastKey = 0;
-            GeneticSolver solver(cube);
-            std::string solution = solver.solve();
-            lastFrame = (float)glfwGetTime();
-            std::cout << solution << "\n";
-            performSequence(solution);
+            solving = true;
+            solverThread = new std::thread(&Scene::solve, this);
         }
         if (glfwGetKey(glfwWindow, GLFW_KEY_ENTER) == GLFW_RELEASE && lastKey == 0) lastKey = -1;
     }
+}
+
+void Scene::solve() {
+    GeneticSolver solver(cube);
+    std::cout << solver.getSolution() << "\n";
+    performSequence(solver.getSolution());
+    solving = false;
 }
 
 float Scene::deltaTime() {
@@ -268,6 +283,14 @@ void Scene::performCommand(const std::string& command) {
             break;
         default:
             break;
+    }
+}
+
+Scene::~Scene() {
+    delete(solverThread);
+    while(!animations.empty()) {
+        delete(animations.front());
+        animations.pop();
     }
 }
 
