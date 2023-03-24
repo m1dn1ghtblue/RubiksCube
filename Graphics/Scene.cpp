@@ -157,6 +157,7 @@ void Scene::processInput(float delta) {
             lastKey = 0;
             GeneticSolver solver(cube);
             std::string solution = solver.solve();
+            lastFrame = (float)glfwGetTime();
             std::cout << solution << "\n";
             performSequence(solution);
         }
