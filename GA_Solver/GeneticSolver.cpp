@@ -11,8 +11,7 @@ GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
     solved = false;
     populationNumber = 0;
     worldNumber = 0;
-
-    population.resize(POPULATION_SIZE, CubeGeneticWrapper(originalCube));
+    population = std::vector<CubeGeneticWrapper>(POPULATION_SIZE, CubeGeneticWrapper(originalCube));
 
     mutationTypes = {'A' , 'B', 'C', 'D'};
 
@@ -173,33 +172,42 @@ void GeneticSolver::perform_random_combo(CubeGeneticWrapper &cubeWrapper) {
 void GeneticSolver::solve() {
     if (solved) return;
 
+#ifdef DEBUG_LOG
     auto time_start = std::chrono::high_resolution_clock::now();
+#endif
     while (fitness(population[0].cube) != MAX_FITNESS) {
         if (populationNumber % POPULATION_LIMIT == 0) {
             worldNumber++;
+#ifdef DEBUG_LOG
             std::cerr << "started world: " << worldNumber << "\n";
+#endif
             populationNumber = 0;
             std::fill(population.begin(), population.end(), CubeGeneticWrapper(originalCube));
         }
 
         evolve();
     }
+#ifdef DEBUG_LOG
     std::chrono::duration<double> duration = std::chrono::high_resolution_clock::now() - time_start;
-
     std::cerr << "solution found on world: " << worldNumber << " population: " << populationNumber << " in " << duration.count() << "s\n";
+#endif
     solution =  population[0].gene;
     solved = true;
 }
 
-void GeneticSolver::evolve() {
-    std::sort(population.begin(), population.end(), [](const CubeGeneticWrapper &lhs, const CubeGeneticWrapper &rhs) {
+struct fitnessComparator {
+    bool operator()(const CubeGeneticWrapper &lhs, const CubeGeneticWrapper &rhs) {
         auto lhsFitness = GeneticSolver::fitness(lhs.cube);
         auto rhsFitness = GeneticSolver::fitness(rhs.cube);
         if (lhsFitness == rhsFitness) {
             return lhs.gene.size() < rhs.gene.size();
         }
         return lhsFitness > rhsFitness;
-    });
+    }
+};
+
+void GeneticSolver::evolve() {
+    std::sort(population.begin(), population.end(), fitnessComparator());
 
     for (size_t i = ELITE_COUNT; i < population.size(); ++i) {
         population[i] = get_random_element(population, ELITE_COUNT);
