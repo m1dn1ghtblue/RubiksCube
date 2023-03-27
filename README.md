@@ -7,7 +7,7 @@ Note that for solution a genetic algorithm is used, which is not reasonable (yet
 ## Controls
 - Use **arrow keys** for camera rotation
 
-- For cube turns use keys **F B L R U D M E S X Y Z** respective to conventional move notation (https://ruwix.com/the-rubiks-cube/notation/)
+- For cube turns use keys **F B L R U D M E S X Y Z** respective to [conventional move notation](https://ruwix.com/the-rubiks-cube/notation/)
 
 - For counterclockwise turns hold **left shift**
 
