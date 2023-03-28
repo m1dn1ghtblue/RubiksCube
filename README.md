@@ -4,6 +4,9 @@ A simple Rubik's cube simulator with console interface and 3D graphics implement
 
 Note that for solution a genetic algorithm is used, which is not reasonable (yet amusing) approach to the Rubik's Cube puzzle and hence finds far-from-optimal solution in relatively long time
 
+## Preview
+![preview_screenshot.png](preview_screenshot.png "Rubik's Cube screenshot")
+
 ## Controls
 - Use **arrow keys** for camera rotation
 
