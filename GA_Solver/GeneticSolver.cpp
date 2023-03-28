@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <chrono>
+#include <algorithm>
 
 GeneticSolver::GeneticSolver(const Cube &cube) : originalCube(cube) {
     std::srand(std::time(nullptr));
